@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>X-MAX ANANT • COMMUNITY</title>
+<link rel="icon" href="https://i.ibb.co/tPqBq1YV/1000031132.jpg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:#000205;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;--cyan:#00f0ff;--green:#00ff88;--gold:#ffcc00;--red:#ff3366;--purple:#a855f7;--panel:rgba(2,14,7,0.97)}
+
+.top{background:linear-gradient(180deg,rgba(255,204,0,0.2),rgba(2,14,7,0.98));border-bottom:1.5px solid var(--gold);padding:20px;text-align:center;position:sticky;top:0;z-index:10}
+.title{font-family:'Orbitron',sans-serif;color:var(--gold);font-size:18px;font-weight:900;letter-spacing:4px;text-shadow:0 0 20px var(--gold)}
+.sub{font-family:'Orbitron',sans-serif;color:#88a0aa;font-size:10px;letter-spacing:3px;margin-top:6px;text-transform:uppercase}
+
+.wrap{max-width:800px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:8px;margin-bottom:16px}
+.tab{flex:1;padding:12px;border-radius:12px;background:rgba(0,255,136,0.06);border:1.5px solid rgba(0,255,136,0.3);color:#88a0aa;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:800;cursor:pointer;text-align:center;letter-spacing:1.5px}
+.tab.active{background:var(--green);color:#000;border-color:var(--green);box-shadow:0 0 20px rgba(0,255,136,0.6)}
+
+.sec{background:var(--panel);border:1.5px solid rgba(0,255,136,0.35);border-radius:18px;padding:18px;margin-bottom:16px}
+.sh{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--cyan);font-weight:900;letter-spacing:2px;margin-bottom:14px}
+
+.feed-item{background:rgba(0,0,0,0.5);border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;margin-bottom:10px}
+.feed-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.feed-user{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--cyan);font-weight:900}
+.feed-time{font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa}
+.feed-body{font-family:'Orbitron',sans-serif;font-size:11px;color:#d4d4d8;line-height:1.5}
+.feed-tag{display:inline-block;padding:3px 8px;border-radius:6px;font-size:9px;font-weight:900;margin-right:6px}
+.feed-tag.win{background:var(--green);color:#000}
+.feed-tag.miss{background:var(--red);color:#fff}
+.feed-tag.big{background:#ffb800;color:#000}
+.feed-tag.small{background:#00ffff;color:#000}
+
+.lb-row{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(0,0,0,0.4);border-radius:12px;margin-bottom:8px}
+.lb-rank{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;width:40px;text-align:center}
+.lb-name{flex:1;font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:#fff}
+.lb-stat{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--gold);font-weight:900}
+
+.empty{text-align:center;padding:40px 20px;color:#88a0aa;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:1px}
+
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="title">👥 COMMUNITY</div>
+  <div class="sub">◆ Live Predictions & Leaderboard ◆</div>
+</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('feed')">📰 FEED</div>
+    <div class="tab" onclick="switchTab('leader')">🏆 LEADERBOARD</div>
+  </div>
+
+  <div id="feedTab">
+    <div class="sec">
+      <div class="sh">📰 LIVE PREDICTION FEED</div>
+      <div id="feedList"><div class="empty">No predictions yet</div></div>
+    </div>
+  </div>
+
+  <div id="leaderTab" style="display:none">
+    <div class="sec">
+      <div class="sh">🏆 TOP PREDICTORS</div>
+      <div id="leaderList"><div class="empty">No data yet</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('feedTab').style.display = t === 'feed' ? 'block' : 'none';
+  document.getElementById('leaderTab').style.display = t === 'leader' ? 'block' : 'none';
+}
+
+function getLedger() {
+  try { return JSON.parse(localStorage.getItem('anant_public_ledger') || '[]'); } catch(e) { return []; }
+}
+
+function renderFeed() {
+  const ledger = getLedger();
+  const list = document.getElementById('feedList');
+  if (!ledger.length) { list.innerHTML = '<div class="empty">No predictions yet</div>'; return; }
+  list.innerHTML = ledger.slice(0, 20).map(p => {
+    const d = new Date(p.timestamp);
+    const sizeTag = p.size === 'BIG' ? 'big' : 'small';
+    let statusTag = '';
+    if (p.status === 'WIN') statusTag = '<span class="feed-tag win">✅ WIN</span>';
+    else if (p.status === 'MISS') statusTag = '<span class="feed-tag miss">❌ MISS</span>';
+    else statusTag = '<span class="feed-tag" style="background:var(--gold);color:#000">⏳ PENDING</span>';
+    return '<div class="feed-item">' +
+      '<div class="feed-head"><div class="feed-user">🔮 ' + (p.key || 'Anonymous').slice(0, 20) + '</div><div class="feed-time">' + d.toLocaleTimeString() + '</div></div>' +
+      '<div class="feed-body">Predicted <span class="feed-tag ' + sizeTag + '">' + p.size + '</span> number <b>' + p.number + '</b> on ' + (p.mode || '1m').toUpperCase() + ' — ' + statusTag + '</div>' +
+      '</div>';
+  }).join('');
+}
+
+function renderLeader() {
+  const ledger = getLedger();
+  const byUser = {};
+  ledger.forEach(p => {
+    const k = p.key || 'unknown';
+    if (!byUser[k]) byUser[k] = { wins: 0, total: 0 };
+    byUser[k].total++;
+    if (p.status === 'WIN') byUser[k].wins++;
+  });
+  const top = Object.entries(byUser).sort((a, b) => (b[1].wins / Math.max(1, b[1].total)) - (a[1].wins / Math.max(1, a[1].total))).slice(0, 20);
+  const list = document.getElementById('leaderList');
+  if (!top.length) { list.innerHTML = '<div class="empty">No data yet</div>'; return; }
+  list.innerHTML = top.map(([k, v], i) => {
+    const r = v.total > 0 ? Math.round((v.wins / v.total) * 100) : 0;
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i + 1);
+    return '<div class="lb-row">' +
+      '<div class="lb-rank">' + medal + '</div>' +
+      '<div class="lb-name">' + k.slice(0, 18) + '</div>' +
+      '<div class="lb-stat">' + v.wins + '/' + v.total + ' · ' + r + '%</div>' +
+      '</div>';
+  }).join('');
+}
+
+renderFeed();
+renderLeader();
+setInterval(() => { renderFeed(); renderLeader(); }, 5000);
+</script>
+</body>
+</html>

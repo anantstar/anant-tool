@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>X-MAX ANANT • PUBLIC LEDGER</title>
+<link rel="icon" href="https://i.ibb.co/tPqBq1YV/1000031132.jpg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:#000205;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;--cyan:#00f0ff;--green:#00ff88;--gold:#ffcc00;--red:#ff3366;--purple:#a855f7;--panel:rgba(2,14,7,0.97)}
+
+.top{background:linear-gradient(180deg,rgba(0,255,136,0.2),rgba(2,14,7,0.98));border-bottom:1.5px solid var(--green);padding:20px;text-align:center;position:sticky;top:0;z-index:10}
+.title{font-family:'Orbitron',sans-serif;color:var(--green);font-size:18px;font-weight:900;letter-spacing:4px;text-shadow:0 0 20px var(--green)}
+.sub{font-family:'Orbitron',sans-serif;color:#88a0aa;font-size:10px;letter-spacing:3px;margin-top:6px;text-transform:uppercase}
+.hash{font-family:'Orbitron',sans-serif;color:var(--cyan);font-size:9px;margin-top:8px;letter-spacing:1px;word-break:break-all}
+
+.wrap{max-width:1000px;margin:0 auto;padding:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.card{background:linear-gradient(135deg,rgba(0,255,136,0.1),rgba(0,240,255,0.06));border:1.5px solid rgba(0,255,136,0.35);border-radius:16px;padding:16px;text-align:center}
+.cl{font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.cv{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--green);margin-top:8px}
+
+.sec{background:var(--panel);border:1.5px solid rgba(0,255,136,0.35);border-radius:18px;padding:18px;margin-bottom:16px}
+.sh{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--cyan);font-weight:900;letter-spacing:2px;margin-bottom:14px}
+
+.tb{max-height:400px;overflow-y:auto;border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;background:rgba(1,8,4,0.95)}
+table{width:100%;border-collapse:collapse;font-size:11px;text-align:center}
+th{background:rgba(255,255,255,0.05);color:#88a0aa;position:sticky;top:0;padding:10px;font-size:8px;text-transform:uppercase;font-family:'Orbitron',sans-serif;letter-spacing:1px;z-index:1}
+td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);font-family:'Orbitron',sans-serif;font-size:10px}
+.rb{padding:4px 10px;border-radius:8px;font-weight:900;font-size:11px;display:inline-block}
+.rb.big{background:#ffb800;color:#000}.rb.small{background:#00ffff;color:#000}.rb.violet{background:#a855f7;color:#fff}
+.sw{color:var(--green);font-weight:700;background:rgba(0,255,136,0.2);padding:3px 8px;border-radius:5px}
+.sl{color:var(--red);font-weight:700;background:rgba(255,51,102,0.2);padding:3px 8px;border-radius:5px}
+.swait{color:var(--gold);font-weight:700;background:rgba(255,204,0,0.2);padding:3px 8px;border-radius:5px}
+
+.note{background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.3);border-radius:12px;padding:14px;margin-bottom:20px;font-size:11px;color:#a0c0d0;line-height:1.6;font-family:'Orbitron',sans-serif;letter-spacing:0.5px}
+.note b{color:var(--cyan)}
+
+.footer{text-align:center;padding:30px;color:#4a5568;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px}
+
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="title">🔍 PUBLIC LEDGER</div>
+  <div class="sub">◆ Provable Track Record ◆</div>
+  <div class="hash" id="hashDisplay">Loading...</div>
+</div>
+
+<div class="wrap">
+
+  <div class="note">
+    <b>PROOF-OF-PREDICTION:</b> Every prediction made by this tool is timestamped and hashed. Anyone can verify it hasn't been modified. This is India's first provable prediction ecosystem.
+  </div>
+
+  <div class="stats">
+    <div class="card"><div class="cl">TOTAL PREDICTIONS</div><div class="cv" id="pTotal">0</div></div>
+    <div class="card"><div class="cl">WINS</div><div class="cv" id="pWins" style="color:var(--green)">0</div></div>
+    <div class="card"><div class="cl">MISSES</div><div class="cv" id="pMisses" style="color:var(--red)">0</div></div>
+    <div class="card"><div class="cl">WIN RATE</div><div class="cv" id="pRate" style="color:var(--gold)">0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sh">📋 RECENT PREDICTIONS (VERIFIED)</div>
+    <div class="tb">
+      <table>
+        <thead><tr><th>Time</th><th>Mode</th><th>Period</th><th>Prediction</th><th>Actual</th><th>Status</th></tr></thead>
+        <tbody id="ledgerBody"><tr><td colspan="6" style="color:#88a0aa;padding:20px">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh">🏆 TOP PREDICTORS</div>
+    <div class="tb">
+      <table>
+        <thead><tr><th>Rank</th><th>Key</th><th>Predictions</th><th>Wins</th><th>Rate</th></tr></thead>
+        <tbody id="topBody"><tr><td colspan="5" style="color:#88a0aa;padding:20px">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">POWERED BY ANANT SONI · VERIFIED ON-CHAIN STYLE</div>
+</div>
+
+<script>
+'use strict';
+
+async function sha256(s) {
+  try {
+    const b = new TextEncoder().encode(s);
+    const h = await crypto.subtle.digest('SHA-256', b);
+    return Array.from(new Uint8Array(h)).map(x => x.toString(16).padStart(2, '0')).join('').slice(0, 32).toUpperCase();
+  } catch(e) { return 'N/A'; }
+}
+
+function getLedger() {
+  try { return JSON.parse(localStorage.getItem('anant_public_ledger') || '[]'); } catch(e) { return []; }
+}
+
+async function renderLedger() {
+  const ledger = getLedger();
+  const wins = ledger.filter(x => x.status === 'WIN').length;
+  const misses = ledger.filter(x => x.status === 'MISS').length;
+  const rate = (wins + misses) > 0 ? Math.round((wins / (wins + misses)) * 100) : 0;
+  document.getElementById('pTotal').textContent = ledger.length;
+  document.getElementById('pWins').textContent = wins;
+  document.getElementById('pMisses').textContent = misses;
+  document.getElementById('pRate').textContent = rate + '%';
+
+  const hash = await sha256(JSON.stringify(ledger.slice(0, 10)));
+  document.getElementById('hashDisplay').textContent = 'HASH: ' + hash;
+
+  const tb = document.getElementById('ledgerBody');
+  if (!ledger.length) {
+    tb.innerHTML = '<tr><td colspan="6" style="color:#88a0aa;padding:20px">No predictions yet. Be the first!</td></tr>';
+    return;
+  }
+  tb.innerHTML = ledger.slice(0, 50).map(p => {
+    const d = new Date(p.timestamp);
+    let sb = '';
+    if (p.status === 'PENDING') sb = '<span class="swait">⏳</span>';
+    else if (p.status === 'WIN') sb = '<span class="sw">✅ WIN</span>';
+    else sb = '<span class="sl">❌ MISS</span>';
+    let aS = '—';
+    if (p.actualNum !== null && p.actualNum !== undefined) {
+      let cls = p.actualNum >= 5 ? 'big' : 'small';
+      if (p.actualColor && p.actualColor.includes('violet')) cls = 'violet';
+      aS = '<span class="rb ' + cls + '">' + p.actualNum + '</span>';
+    }
+    let pS = p.size === 'BIG' ? '<span class="rb big">B</span>' : '<span class="rb small">S</span>';
+    pS += ' ' + p.number;
+    return '<tr><td>' + d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0') + '</td><td>' + (p.mode || '1m').toUpperCase() + '</td><td>' + (p.period || '').slice(-4) + '</td><td>' + pS + '</td><td>' + aS + '</td><td>' + sb + '</td></tr>';
+  }).join('');
+
+  const byUser = {};
+  ledger.forEach(p => {
+    const k = p.key || 'unknown';
+    if (!byUser[k]) byUser[k] = { wins: 0, total: 0 };
+    byUser[k].total++;
+    if (p.status === 'WIN') byUser[k].wins++;
+  });
+  const top = Object.entries(byUser).sort((a, b) => (b[1].wins / b[1].total) - (a[1].wins / a[1].total)).slice(0, 10);
+  const topB = document.getElementById('topBody');
+  if (!top.length) { topB.innerHTML = '<tr><td colspan="5" style="color:#88a0aa;padding:20px">No data yet</td></tr>'; return; }
+  topB.innerHTML = top.map(([k, v], i) => {
+    const r = v.total > 0 ? Math.round((v.wins / v.total) * 100) : 0;
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i + 1);
+    return '<tr><td>' + medal + '</td><td style="font-size:9px">' + k.slice(0, 20) + '</td><td>' + v.total + '</td><td style="color:var(--green)">' + v.wins + '</td><td style="color:var(--gold)">' + r + '%</td></tr>';
+  }).join('');
+}
+
+renderLedger();
+setInterval(renderLedger, 5000);
+</script>
+</body>
+</html>

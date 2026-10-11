@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>X-MAX ANANT • ORACLE</title>
+<link rel="icon" href="https://i.ibb.co/tPqBq1YV/1000031132.jpg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-tap-highlight-color:transparent}
+body,html{width:100%;height:100%;overflow-y:auto;background:#000205;font-family:'Plus Jakarta Sans',sans-serif;--cyan:#00f0ff;--green:#00ff88;--gold:#ffcc00;--red:#ff3366;--purple:#a855f7;--panel:rgba(2,14,7,0.97)}
+
+.gw{position:fixed;inset:0;background:radial-gradient(circle at center,#021a0b 0%,#000205 100%);z-index:50000;display:flex;justify-content:center;align-items:center;flex-direction:column;gap:25px;padding:20px}
+.gwc{width:460px;max-width:95vw;background:var(--panel);border:2.5px solid var(--cyan);border-radius:28px;padding:32px;text-align:center;box-shadow:0 0 80px rgba(0,240,255,0.4);display:flex;flex-direction:column;gap:18px}
+.logo{width:96px;height:96px;border-radius:50%;margin:0 auto;border:2.5px solid var(--cyan);object-fit:cover;box-shadow:0 0 30px var(--cyan);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08);box-shadow:0 0 50px var(--purple)}}
+.gt{font-family:'Orbitron',sans-serif;color:var(--cyan);font-size:16px;font-weight:900;letter-spacing:3px}
+.gs{font-family:'Orbitron',sans-serif;color:#88a0aa;font-size:9px;letter-spacing:3px;text-transform:uppercase}
+.ci{background:#000;border:1.5px solid rgba(0,240,255,0.5);border-radius:12px;padding:16px;color:var(--cyan);font-family:'Orbitron',sans-serif;text-align:center;outline:none;font-size:14px;width:100%;letter-spacing:3px;font-weight:700;text-transform:uppercase}
+.ci:focus{border-color:var(--cyan);box-shadow:0 0 25px rgba(0,240,255,0.5)}
+.cb{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#000;border:none;border-radius:12px;padding:16px;font-family:'Orbitron',sans-serif;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:2px;width:100%;font-size:14px;box-shadow:0 0 25px rgba(0,240,255,0.5)}
+.cb:active{transform:scale(0.97)}
+.ge{color:var(--red);font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;min-height:14px}
+
+.app{display:none;flex-direction:column;min-height:100vh;padding-bottom:40px}
+.top{background:linear-gradient(180deg,rgba(0,240,255,0.2),rgba(2,14,7,0.98));border-bottom:1.5px solid var(--cyan);padding:16px 20px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center}
+.tt{font-family:'Orbitron',sans-serif;color:var(--cyan);font-size:14px;font-weight:900;letter-spacing:2px}
+.mb{background:rgba(255,51,102,0.2);border:1px solid var(--red);color:var(--red);padding:8px 14px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:900;cursor:pointer;letter-spacing:1px}
+
+.wrap{max-width:900px;margin:0 auto;padding:16px;width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.card{background:linear-gradient(135deg,rgba(0,255,136,0.1),rgba(0,240,255,0.06));border:1.5px solid rgba(0,255,136,0.35);border-radius:18px;padding:16px;text-align:center}
+.cl{font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.cv{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:900;color:var(--green);margin-top:8px}
+.cv.cy{color:var(--cyan)}.cv.gl{color:var(--gold)}.cv.rd{color:var(--red)}.cv.pu{color:var(--purple)}
+
+.sec{background:var(--panel);border:1.5px solid rgba(0,255,136,0.35);border-radius:18px;padding:18px;margin-bottom:16px}
+.sh{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--green);font-weight:900;letter-spacing:2px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.row:last-child{border-bottom:none}
+.rn{font-family:'Orbitron',sans-serif;font-size:11px;color:#fff;font-weight:700;letter-spacing:1px}
+.rs{font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;margin-top:3px;letter-spacing:1px;word-break:break-all}
+
+.sw{width:56px;height:30px;border-radius:15px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);position:relative;cursor:pointer;transition:all 0.3s;flex-shrink:0}
+.sw.on{background:var(--green);border-color:var(--green);box-shadow:0 0 15px rgba(0,255,136,0.5)}
+.swk{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;transition:all 0.3s;box-shadow:0 2px 5px rgba(0,0,0,0.3)}
+.sw.on .swk{left:30px}
+
+.btn{padding:12px 18px;border-radius:12px;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:900;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase;border:none}
+.btn.ok{background:linear-gradient(135deg,var(--green),var(--cyan));color:#000}
+.btn.rd{background:linear-gradient(135deg,var(--red),#be123c);color:#fff}
+.btn.gl{background:linear-gradient(135deg,var(--gold),#d97706);color:#000}
+.btn.cy{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#000}
+
+select,input{background:#000;border:1.5px solid rgba(0,255,136,0.4);border-radius:10px;padding:12px;color:var(--green);font-family:'Orbitron',sans-serif;font-size:11px;width:100%;letter-spacing:1px;font-weight:700;outline:none;margin-bottom:10px}
+select:focus,input:focus{border-color:var(--green)}
+
+.tb{max-height:300px;overflow-y:auto;border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;background:rgba(1,8,4,0.95);margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:10px;text-align:center}
+th{background:rgba(255,255,255,0.05);color:#88a0aa;position:sticky;top:0;padding:8px;font-size:7px;text-transform:uppercase;font-family:'Orbitron',sans-serif;letter-spacing:1px}
+td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.05);color:#d4d4d8;font-family:'Orbitron',sans-serif;font-size:10px}
+.bg{padding:3px 8px;border-radius:6px;font-weight:900;font-size:9px}
+.bg.ok{background:var(--green);color:#000}.bg.rd{background:var(--red);color:#fff}.bg.gl{background:var(--gold);color:#000}.bg.cy{background:var(--cyan);color:#000}
+
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="gw" id="gw">
+  <div class="gwc">
+    <img src="https://i.ibb.co/3Ystjppg/1000031130.jpg" class="logo" alt="Anant">
+    <div class="gt">X-MAX ANANT ORACLE</div>
+    <div class="gs">◆ OWNER COMMAND CENTER ◆</div>
+    <input type="password" id="pwIn" class="ci" placeholder="MASTER PASSWORD">
+    <button class="cb" onclick="login()">🔐 LOGIN</button>
+    <div class="ge" id="err"></div>
+  </div>
+</div>
+
+<div class="app" id="app">
+  <div class="top">
+    <div class="tt">👑 ORACLE DASHBOARD</div>
+    <button class="mb" onclick="logout()">LOGOUT</button>
+  </div>
+  <div class="wrap">
+
+    <div class="grid">
+      <div class="card"><div class="cl">TOTAL EARNED</div><div class="cv" id="eTotal">₹0</div></div>
+      <div class="card"><div class="cl">TODAY</div><div class="cv cy" id="eToday">₹0</div></div>
+      <div class="card"><div class="cl">PENDING PAYMENTS</div><div class="cv gl" id="ePending">0</div></div>
+      <div class="card"><div class="cl">ACTIVE KEYS</div><div class="cv pu" id="eKeys">0</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sh">💳 PAYMENT CONTROLS</div>
+      <div class="row">
+        <div><div class="rn">UPI (FamPay)</div><div class="rs" id="upiAddr">theanant@fam</div></div>
+        <div class="sw on" id="swUPI" onclick="tog('upi')"><div class="swk"></div></div>
+      </div>
+      <div class="row">
+        <div><div class="rn">Crypto (USDT TRC20)</div><div class="rs" id="cryAddr">TDw7GMxPTCm2NJHUNx2z4k9mdi94L2xQXb</div></div>
+        <div class="sw on" id="swCry" onclick="tog('crypto')"><div class="swk"></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sh">⚙️ SETTINGS</div>
+      <select id="planSel">
+        <option value="starter">Starter — ₹99 / 7 days — 30% share</option>
+        <option value="pro">Pro — ₹299 / 30 days — 20% share</option>
+        <option value="elite">Elite — ₹999 / 90 days — 10% share</option>
+        <option value="lifetime">Lifetime — ₹4999 — 5% share</option>
+      </select>
+      <button class="btn cy" style="width:100%" onclick="genKey()">🔑 GENERATE NEW KEY</button>
+      <div id="newKeyBox" style="display:none;margin-top:12px;padding:14px;background:rgba(0,255,136,0.1);border:1.5px dashed var(--green);border-radius:12px;text-align:center">
+        <div style="font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;letter-spacing:2px">NEW KEY (TAP TO COPY)</div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:18px;color:var(--green);font-weight:900;margin-top:8px;letter-spacing:3px;cursor:pointer" id="nkVal" onclick="copyNK()">—</div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sh">
+        <span>🔑 ALL KEYS</span>
+        <button class="btn rd" style="padding:6px 12px;font-size:9px" onclick="clearKeys()">🗑 CLEAR ALL</button>
+      </div>
+      <div class="tb">
+        <table>
+          <thead><tr><th>Key</th><th>Status</th><th>Expiry</th><th>Action</th></tr></thead>
+          <tbody id="keysList"><tr><td colspan="4" style="color:#88a0aa;padding:14px">No keys</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sh">💰 PENDING PAYMENTS</div>
+      <div class="tb">
+        <table>
+          <thead><tr><th>Time</th><th>Method</th><th>Amount</th><th>UTR</th><th>Action</th></tr></thead>
+          <tbody id="payList"><tr><td colspan="5" style="color:#88a0aa;padding:14px">No pending payments</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sh">💸 OWNER SHARE (33%)</div>
+      <div class="row"><div><div class="rn">Total Collected</div><div class="rs">From profit share</div></div><div class="cv gl" style="font-size:18px" id="osTotal">₹0</div></div>
+      <div class="row"><div><div class="rn">This Month</div></div><div class="cv gl" style="font-size:18px" id="osMonth">₹0</div></div>
+      <div class="row"><div><div class="rn">Pending Payout</div></div><div class="cv rd" style="font-size:18px" id="osPending">₹0</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sh">📊 ALL USERS</div>
+      <div class="tb">
+        <table>
+          <thead><tr><th>Key</th><th>Status</th><th>Predictions</th><th>Wins</th><th>Rate</th></tr></thead>
+          <tbody id="userList"><tr><td colspan="5" style="color:#88a0aa;padding:14px">No users</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const MASTER_PW = 'ANANT-OWNER-MASTER';
+const K_STORE = 'anant_keys_db';
+const CFG_STORE = 'anant_owner_config_v9';
+const PAY_STORE = 'anant_payments_v9';
+
+let cfg = {
+  upi: { enabled: true, id: 'theanant@fam' },
+  crypto: { enabled: true, address: 'TDw7GMxPTCm2NJHUNx2z4k9mdi94L2xQXb' },
+  profitShare: 33
+};
+
+function toast(m) {
+  let e = document.getElementById('tst');
+  if (!e) {
+    e = document.createElement('div');
+    e.id = 'tst';
+    e.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#00ff88,#00f0ff);color:#000;padding:14px 24px;border-radius:14px;font-family:Orbitron,sans-serif;font-weight:900;font-size:11px;z-index:999999;box-shadow:0 0 35px rgba(0,255,136,0.9);letter-spacing:1px';
+    document.body.appendChild(e);
+  }
+  e.textContent = m; e.style.display = 'block';
+  clearTimeout(e._t); e._t = setTimeout(() => e.style.display = 'none', 2500);
+}
+
+function login() {
+  const pw = (document.getElementById('pwIn').value || '').trim();
+  if (pw !== MASTER_PW) {
+    document.getElementById('err').innerText = '❌ WRONG PASSWORD';
+    return;
+  }
+  document.getElementById('gw').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  loadCfg(); loadKeys(); loadPayments(); updateStats();
+}
+
+function logout() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('gw').style.display = 'flex';
+  document.getElementById('pwIn').value = '';
+}
+
+function loadCfg() {
+  try {
+    const s = localStorage.getItem(CFG_STORE);
+    if (s) cfg = Object.assign(cfg, JSON.parse(s));
+  } catch(e) {}
+  document.getElementById('upiAddr').textContent = cfg.upi.id;
+  document.getElementById('cryAddr').textContent = cfg.crypto.address;
+  document.getElementById('swUPI').classList.toggle('on', cfg.upi.enabled);
+  document.getElementById('swCry').classList.toggle('on', cfg.crypto.enabled);
+}
+
+function saveCfg() {
+  localStorage.setItem(CFG_STORE, JSON.stringify(cfg));
+}
+
+function tog(m) {
+  cfg[m].enabled = !cfg[m].enabled;
+  saveCfg();
+  loadCfg();
+  toast(m.toUpperCase() + ': ' + (cfg[m].enabled ? 'ON' : 'OFF'));
+}
+
+function getKeys() { try { return JSON.parse(localStorage.getItem(K_STORE) || '[]'); } catch(e) { return []; } }
+function saveKeys(k) { localStorage.setItem(K_STORE, JSON.stringify(k)); }
+
+function genKey() {
+  const plan = document.getElementById('planSel').value;
+  const days = { starter: 7, pro: 30, elite: 90, lifetime: 36500 }[plan];
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let r = ''; for (let i = 0; i < 6; i++) r += chars[Math.floor(Math.random() * chars.length)];
+  const key = 'ANANT-' + plan.toUpperCase() + '-' + r;
+  const keys = getKeys();
+  keys.push({ key, plan, createdAt: Date.now(), expiry: Date.now() + days * 86400000, days });
+  saveKeys(keys);
+  document.getElementById('nkVal').textContent = key;
+  document.getElementById('newKeyBox').style.display = 'block';
+  toast('✅ Key generated!');
+  loadKeys();
+  updateStats();
+}
+
+function copyNK() {
+  const k = document.getElementById('nkVal').textContent;
+  navigator.clipboard.writeText(k).then(() => toast('📋 Copied: ' + k));
+}
+
+function loadKeys() {
+  const keys = getKeys();
+  const now = Date.now();
+  const tb = document.getElementById('keysList');
+  if (!keys.length) { tb.innerHTML = '<tr><td colspan="4" style="color:#88a0aa;padding:14px">No keys</td></tr>'; return; }
+  tb.innerHTML = keys.slice().reverse().map(k => {
+    const active = k.expiry > now;
+    const rem = k.expiry - now;
+    let remStr = 'Expired';
+    if (rem > 0) {
+      const d = Math.floor(rem / 86400000);
+      const h = Math.floor((rem % 86400000) / 3600000);
+      remStr = d > 0 ? d + 'd left' : h + 'h left';
+    }
+    return '<tr><td style="font-size:9px">' + k.key + '</td><td><span class="bg ' + (active ? 'ok' : 'rd') + '">' + (active ? 'ACTIVE' : 'EXPIRED') + '</span></td><td style="font-size:9px">' + remStr + '</td><td><button class="btn rd" style="padding:4px 8px;font-size:8px" onclick="delKey(\'' + k.key + '\')">DEL</button></td></tr>';
+  }).join('');
+}
+
+function delKey(k) {
+  if (!confirm('Delete key?')) return;
+  saveKeys(getKeys().filter(x => x.key !== k));
+  loadKeys(); updateStats(); toast('🗑 Deleted');
+}
+
+function clearKeys() {
+  if (!confirm('Delete ALL keys?')) return;
+  saveKeys([]);
+  loadKeys(); updateStats(); toast('🗑 All cleared');
+}
+
+function loadPayments() {
+  const p = JSON.parse(localStorage.getItem(PAY_STORE) || '[]');
+  const tb = document.getElementById('payList');
+  const pending = p.filter(x => x.status === 'PENDING');
+  if (!pending.length) { tb.innerHTML = '<tr><td colspan="5" style="color:#88a0aa;padding:14px">No pending</td></tr>'; return; }
+  tb.innerHTML = pending.map(pm => {
+    const d = new Date(pm.timestamp);
+    return '<tr><td style="font-size:9px">' + d.getHours() + ':' + d.getMinutes() + '</td><td>' + pm.method.toUpperCase() + '</td><td>₹' + pm.amount + '</td><td style="font-size:8px">' + pm.utr + '</td><td><button class="btn ok" style="padding:4px 8px;font-size:8px" onclick="approvePay(\'' + pm.id + '\')">OK</button></td></tr>';
+  }).join('');
+}
+
+function approvePay(id) {
+  const p = JSON.parse(localStorage.getItem(PAY_STORE) || '[]');
+  const idx = p.findIndex(x => x.id === id);
+  if (idx === -1) return;
+  p[idx].status = 'APPROVED';
+  p[idx].approvedAt = Date.now();
+  localStorage.setItem(PAY_STORE, JSON.stringify(p));
+  loadPayments(); updateStats(); toast('✅ Payment approved');
+}
+
+function updateStats() {
+  const keys = getKeys();
+  const now = Date.now();
+  const active = keys.filter(k => k.expiry > now).length;
+  const payments = JSON.parse(localStorage.getItem(PAY_STORE) || '[]');
+  const pending = payments.filter(p => p.status === 'PENDING').length;
+  const approved = payments.filter(p => p.status === 'APPROVED');
+  const total = approved.reduce((s, p) => s + (p.amount || 0), 0);
+  const today = approved.filter(p => {
+    const d = new Date(p.approvedAt || p.timestamp);
+    return d.toDateString() === new Date().toDateString();
+  }).reduce((s, p) => s + (p.amount || 0), 0);
+  document.getElementById('eTotal').textContent = '₹' + total;
+  document.getElementById('eToday').textContent = '₹' + today;
+  document.getElementById('ePending').textContent = pending;
+  document.getElementById('eKeys').textContent = active;
+  document.getElementById('osTotal').textContent = '₹' + Math.round(total * (cfg.profitShare / 100));
+  document.getElementById('osMonth').textContent = '₹' + Math.round(total * (cfg.profitShare / 100));
+  document.getElementById('osPending').textContent = '₹0';
+}
+
+document.getElementById('pwIn').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+</script>
+</body>
+</html>
