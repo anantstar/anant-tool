@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>ANANT AI • VERIFIER</title>
+<link rel="icon" href="https://i.ibb.co/tPqBq1YV/1000031132.jpg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:#000205;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;--cyan:#00f0ff;--green:#00ff88;--gold:#ffcc00;--red:#ff3366;--purple:#a855f7;--panel:rgba(2,14,7,0.97)}
+
+.gw{position:fixed;inset:0;background:radial-gradient(circle at center,#1a0a2e 0%,#000205 100%);z-index:50000;display:flex;justify-content:center;align-items:center;padding:20px}
+.gwc{width:440px;max-width:95vw;background:var(--panel);border:2.5px solid var(--purple);border-radius:28px;padding:32px;text-align:center;box-shadow:0 0 80px rgba(168,85,247,0.4);display:flex;flex-direction:column;gap:16px}
+.logo{width:90px;height:90px;border-radius:50%;margin:0 auto;border:2.5px solid var(--purple);object-fit:cover;box-shadow:0 0 30px var(--purple);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08);box-shadow:0 0 50px var(--cyan)}}
+.gt{font-family:'Orbitron',sans-serif;color:var(--purple);font-size:16px;font-weight:900;letter-spacing:3px}
+.gs{font-family:'Orbitron',sans-serif;color:#88a0aa;font-size:9px;letter-spacing:3px;text-transform:uppercase}
+.ci{background:#000;border:1.5px solid rgba(168,85,247,0.5);border-radius:12px;padding:16px;color:var(--purple);font-family:'JetBrains Mono',monospace;text-align:center;outline:none;font-size:14px;width:100%;letter-spacing:3px;font-weight:700}
+.cb{background:linear-gradient(135deg,var(--purple),var(--cyan));color:#000;border:none;border-radius:12px;padding:16px;font-family:'Orbitron',sans-serif;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:2px;width:100%;font-size:14px}
+.ge{color:var(--red);font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;min-height:14px}
+
+.app{display:none;flex-direction:column;min-height:100vh;padding-bottom:40px}
+.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(168,85,247,0.2),rgba(2,14,7,0.98));border-bottom:1.5px solid var(--purple);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.tt{font-family:'Orbitron',sans-serif;color:var(--purple);font-size:14px;font-weight:900;letter-spacing:2px}
+.tb-link{background:rgba(255,51,102,0.15);border:1px solid var(--red);color:var(--red);padding:8px 14px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:900;cursor:pointer;letter-spacing:1px}
+
+.main{max-width:900px;margin:0 auto;padding:16px;width:100%}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.card{background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(0,240,255,0.06));border:1.5px solid rgba(168,85,247,0.35);border-radius:18px;padding:16px;text-align:center}
+.cl{font-family:'Orbitron',sans-serif;font-size:10px;color:#88a0aa;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+.cv{font-family:'Orbitron',sans-serif;font-size:26px;font-weight:900;color:var(--purple);margin-top:8px}
+
+.sec{background:var(--panel);border:1.5px solid rgba(168,85,247,0.35);border-radius:18px;padding:18px;margin-bottom:16px}
+.sh{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--purple);font-weight:900;letter-spacing:2px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+
+.pay-card{background:rgba(0,0,0,0.5);border:1.5px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px;margin-bottom:12px}
+.pay-row{display:flex;justify-content:space-between;padding:6px 0;font-size:11px;font-family:'Orbitron',sans-serif;gap:8px}
+.pay-l{color:#88a0aa}
+.pay-v{color:#fff;font-weight:700;word-break:break-all;text-align:right;max-width:65%}
+.pay-img{max-width:100%;max-height:250px;border-radius:10px;margin-top:12px;border:1px solid rgba(255,255,255,0.1)}
+.pay-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.btn{padding:14px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:900;letter-spacing:1.5px;cursor:pointer;border:none;text-transform:uppercase}
+.btn.ok{background:linear-gradient(135deg,var(--green),var(--cyan));color:#000}
+.btn.rd{background:linear-gradient(135deg,var(--red),#be123c);color:#fff}
+
+.empty{text-align:center;padding:40px 20px;color:#88a0aa;font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:1px}
+
+#toastEl{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#a855f7,#00f0ff);color:#000;padding:14px 22px;border-radius:14px;font-family:'Orbitron',sans-serif;font-weight:900;font-size:11px;z-index:999999;letter-spacing:1px;max-width:90%;text-align:center;display:none}
+</style>
+</head>
+<body>
+
+<div class="gw" id="gw">
+  <div class="gwc">
+    <img src="https://i.ibb.co/3Ystjppg/1000031130.jpg" class="logo" alt="Anant">
+    <div class="gt">ANANT VERIFIER</div>
+    <div class="gs">◆ COMMUNITY MODERATOR ◆</div>
+    <input type="password" id="pwIn" class="ci" placeholder="VERIFIER PASSWORD">
+    <button class="cb" onclick="login()">🔐 LOGIN</button>
+    <div class="ge" id="err"></div>
+  </div>
+</div>
+
+<div class="app" id="app">
+  <div class="topbar">
+    <div class="tt">🛡️ VERIFIER PANEL</div>
+    <button class="tb-link" onclick="logout()">LOGOUT</button>
+  </div>
+  <div class="main">
+    <div class="stats">
+      <div class="card"><div class="cl">PENDING</div><div class="cv" id="sPending">0</div></div>
+      <div class="card"><div class="cl">APPROVED</div><div class="cv" style="color:var(--green)" id="sApproved">0</div></div>
+      <div class="card"><div class="cl">COMMISSION (5%)</div><div class="cv" style="color:var(--gold)" id="sEarned">₹0</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sh"><span>⏳ PENDING PAYMENTS</span><button class="btn rd" style="padding:6px 10px;font-size:9px;width:auto" onclick="refresh()">🔄</button></div>
+      <div id="pendingList"><div class="empty">Loading...</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sh">✅ APPROVED (RECENT)</div>
+      <div id="approvedList"><div class="empty">Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="toastEl"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+'use strict';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAOTeN-E7iits-YCyE0o6UHtdylH1c1dmA",
+  authDomain: "theanantsoni-d9b5d.firebaseapp.com",
+  projectId: "theanantsoni-d9b5d",
+  storageBucket: "theanantsoni-d9b5d.firebasestorage.app",
+  messagingSenderId: "735336329433",
+  appId: "1:735336329433:web:a9df8c9ec8f9cd6a2d4ec8"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const MASTER_PW = 'ANANT-VERIFIER-2026';
+const COMMISSION = 0.05;
+
+function toast(m) {
+  const el = document.getElementById('toastEl');
+  el.textContent = m;
+  el.style.display = 'block';
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.style.display = 'none'; }, 2500);
+}
+
+function login() {
+  const pw = (document.getElementById('pwIn').value || '').trim();
+  if (pw !== MASTER_PW) { document.getElementById('err').innerText = '❌ WRONG PASSWORD'; return; }
+  document.getElementById('gw').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  listenPayments();
+}
+
+function logout() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('gw').style.display = 'flex';
+  document.getElementById('pwIn').value = '';
+}
+
+function listenPayments() {
+  db.collection('payments').orderBy('timestamp', 'desc').limit(100)
+    .onSnapshot(snap => {
+      const pending = [], approved = [];
+      snap.forEach(doc => {
+        const p = doc.data(); p._id = doc.id;
+        if (p.status === 'PENDING') pending.push(p);
+        else if (p.status === 'APPROVED') approved.push(p);
+      });
+      renderPending(pending);
+      renderApproved(approved);
+      const earned = approved.reduce((s, x) => s + (x.amount || 0) * COMMISSION, 0);
+      document.getElementById('sPending').textContent = pending.length;
+      document.getElementById('sApproved').textContent = approved.length;
+      document.getElementById('sEarned').textContent = '₹' + Math.round(earned);
+    });
+}
+
+function renderPending(list) {
+  const el = document.getElementById('pendingList');
+  if (!list.length) { el.innerHTML = '<div class="empty">✅ No pending payments</div>'; return; }
+  el.innerHTML = list.map(p => {
+    const d = new Date(p.timestamp);
+    return '<div class="pay-card">' +
+      '<div class="pay-row"><span class="pay-l">Time</span><span class="pay-v">' + d.toLocaleString() + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">Username</span><span class="pay-v">' + (p.username || '') + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">UID</span><span class="pay-v" style="font-size:10px">' + (p.uid || '') + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">Method</span><span class="pay-v">' + (p.method || '').toUpperCase() + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">Tier</span><span class="pay-v">' + (p.tier || '').toUpperCase() + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">Amount</span><span class="pay-v" style="color:var(--gold)">₹' + p.amount + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">UTR</span><span class="pay-v">' + (p.utr || '') + '</span></div>' +
+      (p.screenshot ? '<img src="' + p.screenshot + '" class="pay-img">' : '') +
+      '<div class="pay-actions">' +
+        '<button class="btn ok" onclick="approve(\'' + p._id + '\')">✅ APPROVE</button>' +
+        '<button class="btn rd" onclick="reject(\'' + p._id + '\')">❌ REJECT</button>' +
+      '</div></div>';
+  }).join('');
+}
+
+function renderApproved(list) {
+  const el = document.getElementById('approvedList');
+  if (!list.length) { el.innerHTML = '<div class="empty">No approved yet</div>'; return; }
+  el.innerHTML = list.slice(0, 10).map(p => {
+    const d = new Date(p.approvedAt || p.timestamp);
+    return '<div class="pay-card" style="border-color:rgba(0,255,136,0.3)">' +
+      '<div class="pay-row"><span class="pay-l">Approved</span><span class="pay-v" style="color:var(--green)">' + d.toLocaleString() + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">Username</span><span class="pay-v">' + (p.username || '') + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">Amount</span><span class="pay-v">₹' + p.amount + '</span></div>' +
+      '<div class="pay-row"><span class="pay-l">Commission</span><span class="pay-v" style="color:var(--gold)">₹' + Math.round(p.amount * COMMISSION) + '</span></div>' +
+      '</div>';
+  }).join('');
+}
+
+async function approve(id) {
+  if (!confirm('Approve this payment?')) return;
+  try {
+    const doc = await db.collection('payments').doc(id).get();
+    const data = doc.data();
+    await db.collection('payments').doc(id).update({ status: 'APPROVED', approvedAt: Date.now(), approvedBy: 'verifier' });
+
+    const keyStr = 'ANANT-' + (data.tier || 'starter').toUpperCase() + '-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    const days = { starter: 7, pro: 30, elite: 90, lifetime: 36500 }[data.tier] || 30;
+    await db.collection('keys').doc(keyStr).set({
+      key: keyStr, plan: data.tier,
+      expiry: Date.now() + days * 86400000,
+      createdAt: Date.now(), userUID: data.uid,
+      createdBy: 'verifier',
+      deviceFP: data.deviceFP || null,
+      usedBy: data.uid
+    });
+    await db.collection('users').doc(data.uid).update({
+      plan: data.tier,
+      expiry: Date.now() + days * 86400000,
+      paidAmount: data.amount,
+      paidAt: Date.now()
+    });
+    alert('✅ Approved!\nKey: ' + keyStr + '\n\nUser ka plan upgrade ho gaya.');
+    toast('✅ Approved');
+  } catch(e) { toast('❌ Failed: ' + e.message); }
+}
+
+async function reject(id) {
+  if (!confirm('Reject?')) return;
+  try {
+    await db.collection('payments').doc(id).update({ status: 'REJECTED', rejectedAt: Date.now(), rejectedBy: 'verifier' });
+    toast('❌ Rejected');
+  } catch(e) { toast('❌ Failed'); }
+}
+
+function refresh() { toast('🔄 Refreshed'); }
+
+document.getElementById('pwIn').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+</script>
+</body>
+</html>
