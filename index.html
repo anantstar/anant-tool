@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>X-MAX ANANT • PREDICTOR</title>
+<link rel="icon" href="https://i.ibb.co/tPqBq1YV/1000031132.jpg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-tap-highlight-color:transparent}
+body,html{width:100%;height:100%;overflow:hidden;background:#000205;font-family:'Plus Jakarta Sans',sans-serif;--cyan:#00f0ff;--green:#00ff88;--gold:#ffcc00;--red:#ff3366;--purple:#a855f7;--panel:rgba(2,14,7,0.97)}
+
+.gw{position:fixed;inset:0;background:radial-gradient(circle at center,#021a0b 0%,#000205 100%);z-index:50000;display:flex;justify-content:center;align-items:center;flex-direction:column;gap:25px;padding:20px}
+.gwc{width:460px;max-width:95vw;background:var(--panel);border:2.5px solid var(--green);border-radius:28px;padding:32px;text-align:center;box-shadow:0 0 80px rgba(0,255,136,0.4);display:flex;flex-direction:column;gap:18px}
+.logo{width:96px;height:96px;border-radius:50%;margin:0 auto;border:2.5px solid var(--green);object-fit:cover;box-shadow:0 0 30px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08);box-shadow:0 0 50px var(--cyan)}}
+.gt{font-family:'Orbitron',sans-serif;color:var(--green);font-size:16px;font-weight:900;letter-spacing:3px}
+.gs{font-family:'Orbitron',sans-serif;color:#88a0aa;font-size:9px;letter-spacing:3px;text-transform:uppercase}
+.ci{background:#000;border:1.5px solid rgba(0,255,136,0.5);border-radius:12px;padding:16px;color:var(--green);font-family:'Orbitron',sans-serif;text-align:center;outline:none;font-size:14px;width:100%;letter-spacing:3px;font-weight:700;text-transform:uppercase}
+.ci:focus{border-color:var(--green);box-shadow:0 0 25px rgba(0,255,136,0.5)}
+.cb{background:linear-gradient(135deg,var(--green),var(--cyan));color:#000;border:none;border-radius:12px;padding:16px;font-family:'Orbitron',sans-serif;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:2px;width:100%;font-size:14px;box-shadow:0 0 25px rgba(0,255,136,0.5)}
+.cb:active{transform:scale(0.97)}
+.ge{color:var(--red);font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;min-height:14px}
+
+.free-badge{background:linear-gradient(135deg,rgba(255,204,0,0.2),rgba(255,204,0,0.1));border:1.5px solid var(--gold);border-radius:12px;padding:10px;text-align:center;margin-top:10px}
+.free-txt{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--gold);font-weight:900;letter-spacing:1.5px}
+
+.suite{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;max-width:97vw;background:var(--panel);backdrop-filter:blur(50px);border:2.5px solid var(--green);border-radius:28px;z-index:10001;box-shadow:0 40px 100px rgba(0,0,0,0.95),0 0 80px rgba(0,255,136,0.4);display:none;flex-direction:column;overflow:hidden;max-height:95vh}
+.sh{background:linear-gradient(180deg,rgba(0,255,136,0.3) 0%,rgba(2,14,7,0.98) 100%);border-bottom:1.5px solid rgba(0,255,136,0.5);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;cursor:move}
+.st{font-family:'Orbitron',sans-serif;color:var(--green);font-size:11px;font-weight:900;letter-spacing:2px}
+.sb{padding:16px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;max-height:calc(95vh - 60px)}
+
+.pill{background:rgba(0,255,136,0.15);border:1.5px solid var(--green);border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800;color:var(--green);font-family:'Orbitron',sans-serif;letter-spacing:1px}
+.dot{width:9px;height:9px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green);animation:blink 1s infinite alternate}
+@keyframes blink{0%{opacity:0.3}100%{opacity:1}}
+
+.plan-badge{background:linear-gradient(135deg,rgba(168,85,247,0.2),rgba(0,240,255,0.1));border:1.5px solid var(--purple);border-radius:12px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:900;color:var(--purple);letter-spacing:1.5px}
+.plan-badge .pl{color:#88a0aa;font-size:8px;letter-spacing:2px}
+
+.info{background:rgba(0,0,0,0.75);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.lb{color:#88a0aa;font-size:8px;text-transform:uppercase;font-weight:700;letter-spacing:2px;font-family:'Orbitron',sans-serif}
+.vl{color:#fff;font-size:13px;font-weight:700;margin-top:3px;font-family:'Orbitron',sans-serif}
+
+/* PREDICTION BOX - YELLOW HIGHLIGHT */
+.box{background:linear-gradient(135deg,rgba(0,255,136,0.15),rgba(255,204,0,0.1));border:2px solid var(--gold);border-radius:18px;padding:18px;text-align:center;position:relative;overflow:hidden;box-shadow:0 0 25px rgba(255,204,0,0.4)}
+.box::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,204,0,0.25),transparent);animation:scan 3s infinite}
+@keyframes scan{to{left:100%}}
+.box>*{position:relative;z-index:1}
+
+#predTitle{font-size:11px;color:var(--gold);font-family:'Orbitron',sans-serif;margin-bottom:10px;letter-spacing:2px;font-weight:900}
+#predDisp{font-size:42px;font-family:'Orbitron',sans-serif;font-weight:900;margin:10px 0;letter-spacing:2px}
+#predDisp .ps{color:var(--cyan);text-shadow:0 0 30px var(--cyan)}
+#predDisp .pn{color:var(--green);text-shadow:0 0 30px var(--green)}
+#predDisp .pl2{color:var(--gold);text-shadow:0 0 30px var(--gold);font-size:22px}
+#predConf{font-size:13px;color:var(--gold);margin-top:8px;font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:1px}
+#predReason{font-size:10px;color:#88a0aa;margin-top:6px;font-family:'Orbitron',sans-serif;letter-spacing:1px;font-weight:700}
+.cm{width:100%;height:10px;background:rgba(255,255,255,0.1);border-radius:5px;overflow:hidden;margin-top:12px}
+.cf{height:100%;background:linear-gradient(90deg,#ff3366,#ffcc00,#00ff88);border-radius:5px;transition:width 0.6s;box-shadow:0 0 15px rgba(0,255,136,0.6)}
+
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dc{background:rgba(0,0,0,0.65);border:1px solid rgba(0,255,136,0.25);border-radius:12px;padding:8px;text-align:center}
+.dl{font-family:'Orbitron',sans-serif;font-size:7px;color:#88a0aa;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.dv{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:900;color:#fff;margin-top:3px}
+.dv.g{color:var(--green)}.dv.r{color:var(--red)}.dv.y{color:var(--gold)}.dv.c{color:var(--cyan)}
+
+.shake{animation:shk 0.4s infinite}
+@keyframes shk{0%,100%{transform:translate(-50%,-50%) translate(0,0)}20%{transform:translate(-50%,-50%) translate(-7px,4px)}40%{transform:translate(-50%,-50%) translate(7px,-4px)}60%{transform:translate(-50%,-50%) translate(-4px,-2px)}80%{transform:translate(-50%,-50%) translate(4px,2px)}}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sc{background:linear-gradient(135deg,rgba(0,255,136,0.1),rgba(0,240,255,0.05));border:1px solid rgba(0,255,136,0.35);border-radius:12px;padding:10px 6px;text-align:center}
+.sl{font-family:'Orbitron',sans-serif;font-size:7px;color:#88a0aa;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.sv{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:900;color:#fff;margin-top:4px}
+
+.sec{font-family:'Orbitron',sans-serif;font-size:9px;color:var(--cyan);letter-spacing:3px;text-align:center;padding:6px 0;border-top:1px solid rgba(0,255,136,0.25);border-bottom:1px solid rgba(0,255,136,0.25);margin:6px 0;display:flex;justify-content:space-between;align-items:center;padding-left:12px;padding-right:12px}
+.sbtn{font-family:'Orbitron',sans-serif;font-size:8px;padding:4px 10px;border-radius:7px;background:rgba(255,51,102,0.2);border:1px solid rgba(255,51,102,0.5);color:var(--red);cursor:pointer;letter-spacing:1px;font-weight:800}
+
+.tb{max-height:200px;overflow-y:auto;border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;background:rgba(1,8,4,0.95)}
+table{width:100%;border-collapse:collapse;font-size:10px;text-align:center}
+th{background:rgba(255,255,255,0.05);color:#88a0aa;position:sticky;top:0;padding:7px;font-size:7px;text-transform:uppercase;font-family:'Orbitron',sans-serif;letter-spacing:1px;z-index:1}
+td{padding:7px;border-bottom:1px solid rgba(255,255,255,0.05);color:#d4d4d8;font-family:'Orbitron',sans-serif}
+.rb{padding:4px 10px;border-radius:8px;font-weight:900;font-size:11px;display:inline-block;min-width:24px}
+.rb.big{background:#ffb800;color:#000}.rb.small{background:#00ffff;color:#000}.rb.violet{background:#a855f7;color:#fff}
+.sw{color:var(--green);font-weight:700;background:rgba(0,255,136,0.2);padding:3px 8px;border-radius:5px}
+.sl2{color:var(--red);font-weight:700;background:rgba(255,51,102,0.2);padding:3px 8px;border-radius:5px}
+.swait{color:var(--gold);font-weight:700;background:rgba(255,204,0,0.2);padding:3px 8px;border-radius:5px}
+
+.ps2{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;padding:8px 0}
+.pb{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:12px;font-weight:900}
+.pb.big{background:linear-gradient(135deg,#ffb800,#b45309);color:#000}
+.pb.small{background:linear-gradient(135deg,#00ffff,#0891b2);color:#000}
+.pb.violet{background:linear-gradient(135deg,#a855f7,#6d28d9);color:#fff}
+
+.tc{display:flex;align-items:flex-end;gap:2px;height:55px;padding:5px;background:rgba(0,0,0,0.55);border-radius:12px}
+.tr{flex:1;border-radius:3px 3px 0 0;min-height:4px}
+.tr.big{background:linear-gradient(180deg,#ffb800,#b45309)}
+.tr.small{background:linear-gradient(180deg,#00ffff,#0891b2)}
+.tr.violet{background:linear-gradient(180deg,#a855f7,#6d28d9)}
+
+.mt{display:flex;gap:8px}
+.mtb{flex:1;padding:10px;border-radius:12px;background:rgba(0,255,136,0.06);border:1.5px solid rgba(0,255,136,0.3);color:#88a0aa;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:800;cursor:pointer;text-align:center;letter-spacing:1.5px}
+.mtb.active{background:var(--green);color:#000;border-color:var(--green);box-shadow:0 0 20px rgba(0,255,136,0.6)}
+
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qb{padding:10px;border-radius:12px;background:rgba(0,240,255,0.1);border:1.5px solid rgba(0,240,255,0.4);color:var(--cyan);font-family:'Orbitron',sans-serif;font-size:10px;font-weight:800;cursor:pointer;text-align:center;letter-spacing:1px}
+
+.wm{font-size:8px;color:var(--cyan);text-align:right;letter-spacing:2px;font-weight:700;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-top:6px}
+
+.pay-screen{position:fixed;inset:0;background:rgba(2,14,7,0.98);z-index:20000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.pay-card{width:500px;max-width:95vw;background:var(--panel);border:2.5px solid var(--gold);border-radius:24px;padding:24px;box-shadow:0 0 60px rgba(255,204,0,0.4);max-height:95vh;overflow-y:auto}
+.pay-title{font-family:'Orbitron',sans-serif;color:var(--gold);font-size:14px;font-weight:900;letter-spacing:2px;text-align:center;margin-bottom:18px}
+
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.tier{padding:14px;border-radius:14px;background:rgba(0,0,0,0.5);border:1.5px solid rgba(255,255,255,0.1);cursor:pointer;transition:all 0.2s;text-align:center}
+.tier.on{border-color:var(--green);background:rgba(0,255,136,0.1);box-shadow:0 0 20px rgba(0,255,136,0.3)}
+.tier-n{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:900;color:#fff;letter-spacing:1px}
+.tier-p{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:900;color:var(--gold);margin-top:6px}
+.tier-d{font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;margin-top:4px;letter-spacing:1px}
+.tier-s{font-family:'Orbitron',sans-serif;font-size:9px;color:var(--green);margin-top:4px;letter-spacing:1px;font-weight:700}
+
+.pm-opt{display:flex;align-items:center;gap:14px;padding:16px;border-radius:14px;background:rgba(0,0,0,0.5);border:1.5px solid rgba(255,255,255,0.1);margin-bottom:10px;cursor:pointer;transition:all 0.2s}
+.pm-opt.on{border-color:var(--green);background:rgba(0,255,136,0.1);box-shadow:0 0 20px rgba(0,255,136,0.3)}
+.pm-ic{font-size:30px}
+.pm-nm{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:900;color:#fff;letter-spacing:1px}
+.pm-sb{font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;margin-top:3px;letter-spacing:1px;word-break:break-all}
+
+.qr-box{background:rgba(0,255,136,0.08);border:2px dashed var(--green);border-radius:16px;padding:16px;text-align:center;margin:14px 0}
+.qr-img{width:220px;height:220px;background:#fff;border-radius:12px;padding:8px;margin:0 auto 10px;object-fit:contain}
+.qr-txt{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--green);font-weight:900;word-break:break-all;letter-spacing:1px;margin-bottom:6px}
+.copy-btn{background:rgba(0,255,136,0.15);border:1.5px solid var(--green);color:var(--green);padding:8px 16px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:900;cursor:pointer;margin-top:10px;letter-spacing:1px}
+
+.upi-btn{display:block;width:100%;padding:16px;border-radius:14px;background:linear-gradient(135deg,var(--green),var(--cyan));color:#000;font-family:'Orbitron',sans-serif;font-weight:900;font-size:14px;letter-spacing:2px;text-align:center;text-decoration:none;margin-top:10px;box-shadow:0 0 25px rgba(0,255,136,0.5)}
+
+.wm-ptr{position:fixed;top:15px;left:15px;z-index:45000;display:none}
+.wm-ic{width:72px;height:72px;background:#000;border:2.5px solid var(--green);border-radius:50%;display:flex;justify-content:center;align-items:center;cursor:pointer;box-shadow:0 0 35px var(--green);overflow:hidden;animation:pulse 2s infinite}
+.wm-ic img{width:100%;height:100%;object-fit:cover}
+
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="gw" id="gw">
+  <div class="gwc">
+    <img src="https://i.ibb.co/3Ystjppg/1000031130.jpg" class="logo" alt="Anant">
+    <div class="gt">X-MAX ANANT</div>
+    <div class="gs">◆ ULTIMATE PREDICTOR v11 ◆</div>
+    <input type="text" id="keyIn" class="ci" placeholder="ENTER KEY (OPTIONAL)" autocomplete="off" spellcheck="false">
+    <button class="cb" onclick="verifyKey()">🔓 UNLOCK</button>
+    <div class="ge" id="keyErr"></div>
+    <div class="free-badge">
+      <div class="free-txt" id="freeTxt">🎁 FREE TRIAL: 10 PREDICTIONS</div>
+    </div>
+  </div>
+</div>
+
+<div class="suite" id="suite">
+  <div class="sh" id="shHead">
+    <div class="st">X-MAX ANANT • PRO</div>
+    <div style="display:flex;gap:6px">
+      <button class="cb" style="width:auto;padding:6px 12px;font-size:8px;background:rgba(0,240,255,0.2);border:1px solid var(--cyan);color:var(--cyan)" onclick="toggleSound()" id="sndBtn">🔊</button>
+      <button class="cb" style="width:auto;padding:6px 12px;font-size:8px;background:rgba(255,51,102,0.2);border:1px solid var(--red);color:var(--red)" onclick="logout()">EXIT</button>
+    </div>
+  </div>
+  <div class="sb">
+    <div class="plan-badge">
+      <span class="pl">CURRENT PLAN</span>
+      <span id="planName">🎁 FREE TRIAL</span>
+    </div>
+
+    <div class="mt">
+      <div class="mtb active" data-mode="1m" onclick="switchMode('1m')">1 MIN</div>
+      <div class="mtb" data-mode="30s" onclick="switchMode('30s')">30 SEC</div>
+    </div>
+
+    <div class="pill"><span>⚡ REAL-TIME STREAM</span><div class="dot"></div></div>
+
+    <div class="info">
+      <div><span class="lb">TARGET PERIOD</span><span class="vl" id="periodId" style="color:var(--cyan)">SYNC...</span></div>
+      <div style="text-align:right"><span class="lb">TIMER</span><span class="vl" id="timer" style="color:var(--gold)">00:00</span></div>
+    </div>
+
+    <div style="background:rgba(0,0,0,0.55);border:1px solid rgba(0,255,136,0.35);border-radius:14px;padding:12px">
+      <div style="font-family:'Orbitron',sans-serif;font-size:8px;color:#88a0aa;letter-spacing:2px;text-align:center;margin-bottom:8px">◆ LAST RESULT (LIVE) ◆</div>
+      <div style="display:flex;justify-content:space-around;align-items:center">
+        <div style="text-align:center"><div style="font-size:8px;color:#88a0aa;font-family:'Orbitron',sans-serif">NUMBER</div><div style="font-size:28px;font-weight:900;color:var(--cyan);font-family:'Orbitron',sans-serif" id="lastNum">—</div></div>
+        <div style="text-align:center"><div style="font-size:8px;color:#88a0aa;font-family:'Orbitron',sans-serif">SIZE</div><div style="font-size:20px;font-weight:900;font-family:'Orbitron',sans-serif" id="lastSize">—</div></div>
+        <div style="text-align:center"><div style="font-size:8px;color:#88a0aa;font-family:'Orbitron',sans-serif">COLOR</div><div style="font-size:14px;font-weight:900;font-family:'Orbitron',sans-serif" id="lastColor">—</div></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="sc"><div class="sl">TOTAL</div><div class="sv" id="stTotal">0</div></div>
+      <div class="sc"><div class="sl">WIN</div><div class="sv" style="color:var(--green)" id="stWin">0</div></div>
+      <div class="sc"><div class="sl">MISS</div><div class="sv" style="color:var(--red)" id="stMiss">0</div></div>
+      <div class="sc"><div class="sl">RATE</div><div class="sv" style="color:var(--gold)" id="stRate">0%</div></div>
+    </div>
+
+    <!-- PREDICTION BOX - YELLOW BORDER -->
+    <div class="box" id="predBox">
+      <div id="predTitle">◆ TAP START ENGINE TO PREDICT ◆</div>
+      <div id="predDisp"><span class="pl2">WAITING...</span></div>
+      <div id="predConf">CONFIDENCE: --%</div>
+      <div class="cm"><div class="cf" id="confFill" style="width:0%"></div></div>
+      <div id="predReason">—</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <button class="cb" id="startBtn" onclick="runEngine()">🚀 START ENGINE</button>
+      <button class="cb" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);color:#fff" onclick="minimize()">👁 MINIMIZE</button>
+    </div>
+
+    <button class="cb" style="background:linear-gradient(135deg,var(--gold),#f59e0b)" onclick="openPayment()">💳 BUY / UPGRADE PLAN</button>
+
+    <div class="qa">
+      <div class="qb" onclick="resetHistory()">🗑 RESET HISTORY</div>
+      <div class="qb" onclick="exportHistory()">📤 EXPORT JSON</div>
+    </div>
+
+    <div class="sec">📈 TREND CHART (50)</div>
+    <div class="tc" id="trendChart"></div>
+
+    <div style="background:rgba(0,0,0,0.45);border:1px solid rgba(0,255,136,0.25);border-radius:14px;padding:10px">
+      <div style="font-family:'Orbitron',sans-serif;font-size:8px;color:#88a0aa;letter-spacing:2px;margin-bottom:6px;text-align:center">LAST 30 RESULTS</div>
+      <div class="ps2" id="patternStrip"></div>
+    </div>
+
+    <div class="dg">
+      <div class="dc"><div class="dl">STREAK</div><div class="dv" id="dStreak">0</div></div>
+      <div class="dc"><div class="dl">MOMENTUM</div><div class="dv" id="dMom">0.0</div></div>
+      <div class="dc"><div class="dl">TREND</div><div class="dv c" id="dTrend">—</div></div>
+      <div class="dc"><div class="dl">BIG %</div><div class="dv c" id="dBig">0%</div></div>
+      <div class="dc"><div class="dl">SMALL %</div><div class="dv y" id="dSmall">0%</div></div>
+      <div class="dc"><div class="dl">PATTERN</div><div class="dv g" id="dPat">—</div></div>
+    </div>
+
+    <div class="sec">
+      <span>📋 MY PREDICTION HISTORY</span>
+      <span class="sbtn" onclick="resetHistory()">🗑 CLEAR</span>
+    </div>
+    <div class="tb">
+      <table>
+        <thead><tr><th>Period</th><th>Pred</th><th>Actual</th><th>Conf</th><th>Result</th></tr></thead>
+        <tbody id="predTable"><tr><td colspan="5" style="color:#88a0aa;padding:20px;text-align:center"><div style="font-size:24px;margin-bottom:8px">🎯</div><div style="font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:1px">NO PREDICTIONS YET<br><span style="color:var(--green);font-size:9px">Click START to begin</span></div></td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="sec">📜 FULL RESULT HISTORY</div>
+    <div class="tb">
+      <table>
+        <thead><tr><th>Period</th><th>Number</th><th>Size</th><th>Color</th></tr></thead>
+        <tbody id="histTable"><tr><td colspan="4" style="color:#88a0aa;padding:10px">Loading...</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="wm">POWERED BY ANANT SONI</div>
+  </div>
+</div>
+
+<!-- PAYMENT SCREEN -->
+<div class="pay-screen" id="payScreen">
+  <div class="pay-card">
+    <div class="pay-title">💳 SELECT PLAN & PAY</div>
+
+    <div style="font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;letter-spacing:2px;text-align:center;margin-bottom:10px">STEP 1 — CHOOSE PLAN</div>
+    <div class="tier-grid">
+      <div class="tier on" data-tier="starter" onclick="pickTier('starter')">
+        <div class="tier-n">STARTER</div>
+        <div class="tier-p">₹99</div>
+        <div class="tier-d">7 DAYS</div>
+        <div class="tier-s">30% profit share</div>
+      </div>
+      <div class="tier" data-tier="pro" onclick="pickTier('pro')">
+        <div class="tier-n">PRO</div>
+        <div class="tier-p">₹299</div>
+        <div class="tier-d">30 DAYS</div>
+        <div class="tier-s">20% profit share</div>
+      </div>
+      <div class="tier" data-tier="elite" onclick="pickTier('elite')">
+        <div class="tier-n">ELITE</div>
+        <div class="tier-p">₹999</div>
+        <div class="tier-d">90 DAYS</div>
+        <div class="tier-s">10% profit share</div>
+      </div>
+      <div class="tier" data-tier="lifetime" onclick="pickTier('lifetime')">
+        <div class="tier-n">LIFETIME</div>
+        <div class="tier-p">₹4999</div>
+        <div class="tier-d">NEVER EXPIRES</div>
+        <div class="tier-s">5% profit share</div>
+      </div>
+    </div>
+
+    <div style="font-family:'Orbitron',sans-serif;font-size:9px;color:#88a0aa;letter-spacing:2px;text-align:center;margin:14px 0 10px">STEP 2 — CHOOSE PAYMENT</div>
+    <div id="payMethods"></div>
+
+    <div class="qr-box" id="qrBox" style="display:none">
+      <div style="font-family:'Orbitron',sans-serif;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:10px" id="qrLabel">SCAN TO PAY</div>
+      <img id="qrImg" class="qr-img" src="" alt="QR">
+      <div class="qr-txt" id="qrAddr"></div>
+      <button class="copy-btn" onclick="copyAddr()">📋 COPY</button>
+    </div>
+
+    <a href="#" id="upiLink" class="upi-btn" style="display:none" onclick="openUPI(event)">📱 PAY ₹<span id="payAmt">0</span> VIA UPI APP</a>
+
+    <div style="margin-top:14px">
+      <label style="color:#88a0aa;font-size:9px;font-family:'Orbitron',sans-serif;letter-spacing:1px">UTR / TXID</label>
+      <input type="text" id="utrIn" class="ci" style="margin-top:6px;text-align:center;letter-spacing:2px" placeholder="ENTER UTR/TXID">
+    </div>
+
+    <div style="margin-top:12px">
+      <label style="color:#88a0aa;font-size:9px;font-family:'Orbitron',sans-serif;letter-spacing:1px">SCREENSHOT</label>
+      <input type="file" id="shotIn" accept="image/*" style="display:none" onchange="shotChange(event)">
+      <button class="cb" style="background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.3);margin-top:6px" onclick="document.getElementById('shotIn').click()">📸 UPLOAD</button>
+      <div id="shotPrev" style="margin-top:8px;text-align:center"></div>
+    </div>
+
+    <button class="cb" style="background:linear-gradient(135deg,var(--gold),#f59e0b);margin-top:16px" onclick="submitPay()">✅ SUBMIT PAYMENT</button>
+    <button class="cb" style="background:rgba(255,255,255,0.05);color:#fff;margin-top:8px" onclick="closePay()">✕ CANCEL</button>
+  </div>
+</div>
+
+<div class="wm-ptr" id="wmPtr">
+  <div class="wm-ic" onclick="restore()">
+    <img src="https://i.ibb.co/BK2yr11w/Adobe-Express-file.jpg" alt="Lion">
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ═══ API ENDPOINTS — LIVE RESULT (No signature needed) ═══
+const API = {
+  '30s': 'https://draw.ar-lottery01.com/WinGo/WinGo_30S.json',
+  '1m': 'https://draw.ar-lottery01.com/WinGo/WinGo_1M.json'
+};
+const MODE_SEC = {'30s':30, '1m':60};
+const STORE_HIST = 'anant_pred_v11';
+const STORE_SND = 'anant_snd_v11';
+const STORE_MODE = 'anant_mode_v11';
+const STORE_KEY = 'anant_active_key_v11';
+const STORE_FREE = 'anant_free_used_v11';
+const FREE_MAX = 10;
+
+const TIERS = {
+  starter: { name: 'Starter', price: 99, days: 7, share: 30, emoji: '🌱' },
+  pro: { name: 'Pro', price: 299, days: 30, share: 20, emoji: '⚡' },
+  elite: { name: 'Elite', price: 999, days: 90, share: 10, emoji: '💎' },
+  lifetime: { name: 'Lifetime', price: 4999, days: 36500, share: 5, emoji: '♾️' }
+};
+
+let MODE = '1m';
+let raw = [];
+let tracked = [];
+let engineState = 'idle';
+let lastPer = null;
+let soundOn = true;
+let activeKey = null;
+let selectedTier = 'starter';
+let selectedMethod = null;
+let shotData = null;
+
+// ═══ OWNER CONFIG ═══
+let ownerConfig = {
+  upi: { enabled: true, id: 'theanant@fam', name: 'Anant Pro', qr: 'https://i.ibb.co/602xXq77/file-000000007d2081faab7dabe26ae9cb2f.png' },
+  crypto: { enabled: true, address: 'TDw7GMxPTCm2NJHUNx2z4k9mdi94L2xQXb', network: 'TRC20', coin: 'USDT', qr: 'https://i.ibb.co/RTT1Vg0S/Screenshot-20261001-133314-Trust-Wallet.jpg' }
+};
+
+// ═══ HELPERS ═══
+function speak(t) {
+  if (!soundOn || !window.speechSynthesis) return;
+  try {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = 'hi-IN'; u.rate = 1.0;
+    window.speechSynthesis.speak(u);
+  } catch(e) {}
+}
+function beep(f, d) {
+  if (!soundOn) return;
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = f || 880;
+    g.gain.setValueAtTime(0.1, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (d || 0.15));
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + (d || 0.15));
+  } catch(e) {}
+}
+function toggleSound() {
+  soundOn = !soundOn;
+  localStorage.setItem(STORE_SND, soundOn ? '1' : '0');
+  document.getElementById('sndBtn').textContent = soundOn ? '🔊' : '🔇';
+  toast(soundOn ? '🔊 Sound ON' : '🔇 Sound OFF');
+}
+function toast(m) {
+  let el = document.getElementById('toastEl');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'toastEl';
+    el.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#00ff88,#00f0ff);color:#000;padding:14px 24px;border-radius:14px;font-family:Orbitron,sans-serif;font-weight:900;font-size:11px;z-index:999999;box-shadow:0 0 35px rgba(0,255,136,0.9);letter-spacing:1px;max-width:90%;text-align:center';
+    document.body.appendChild(el);
+  }
+  el.textContent = m;
+  el.style.display = 'block';
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.style.display = 'none'; }, 2500);
+}
+
+// ═══ FREE BANNER ═══
+function updateFreeBanner() {
+  const used = parseInt(localStorage.getItem(STORE_FREE) || '0');
+  const left = FREE_MAX - used;
+  const el = document.getElementById('freeTxt');
+  if (!el) return;
+  if (activeKey && activeKey.plan !== 'trial') {
+    const t = TIERS[activeKey.plan] || { name: activeKey.plan, emoji: '💎' };
+    el.textContent = t.emoji + ' ' + t.name.toUpperCase() + ' PLAN ACTIVE';
+    el.style.color = 'var(--green)';
+    return;
+  }
+  if (left <= 0) { el.textContent = '🔒 FREE TRIAL ENDED — BUY PLAN'; el.style.color = 'var(--red)'; }
+  else if (left <= 3) { el.textContent = '🎁 FREE: ' + left + ' LEFT — HURRY!'; el.style.color = 'var(--gold)'; }
+  else { el.textContent = '🎁 FREE TRIAL: ' + left + ' PREDICTIONS LEFT'; el.style.color = 'var(--gold)'; }
+}
+
+// ═══ AUTH ═══
+function verifyKey() {
+  const key = (document.getElementById('keyIn').value || '').trim().toUpperCase();
+  const err = document.getElementById('keyErr');
+
+  if (!key) {
+    const used = parseInt(localStorage.getItem(STORE_FREE) || '0');
+    if (used >= FREE_MAX) { err.innerText = '🔒 FREE TRIAL ENDED — BUY PLAN'; speak('Free trial khatam. Plan kharido'); return; }
+    activeKey = { key: 'FREE_TRIAL', plan: 'trial', expiry: Date.now() + 86400000 };
+    localStorage.setItem(STORE_KEY, 'FREE_TRIAL');
+    openSuite();
+    speak('Welcome! Free trial: ' + (FREE_MAX - used) + ' predictions left');
+    return;
+  }
+
+  const keys = JSON.parse(localStorage.getItem('anant_keys_db') || '[]');
+  const found = keys.find(k => k.key === key);
+  if (!found) { err.innerText = '❌ INVALID KEY'; speak('Galat key'); shakeIn(); return; }
+  if (Date.now() > found.expiry) { err.innerText = '⏰ KEY EXPIRED'; speak('Key expire ho gayi'); shakeIn(); return; }
+
+  activeKey = found;
+  localStorage.setItem(STORE_KEY, key);
+  openSuite();
+  speak('Welcome back. ' + found.plan + ' plan active');
+}
+
+function openSuite() {
+  document.getElementById('gw').style.display = 'none';
+  document.getElementById('suite').style.display = 'flex';
+  loadHistory();
+  loadOwnerConfig();
+  updatePlanBadge();
+  startFeeds();
+  beep(880, 0.1);
+  setTimeout(() => beep(1319, 0.2), 120);
+}
+
+function updatePlanBadge() {
+  const el = document.getElementById('planName');
+  if (!el) return;
+  if (!activeKey || activeKey.plan === 'trial') {
+    const used = parseInt(localStorage.getItem(STORE_FREE) || '0');
+    el.textContent = '🎁 FREE (' + (FREE_MAX - used) + ' left)';
+    el.style.color = 'var(--gold)';
+  } else {
+    const t = TIERS[activeKey.plan] || { name: activeKey.plan, emoji: '💎' };
+    el.textContent = t.emoji + ' ' + t.name.toUpperCase();
+    el.style.color = 'var(--green)';
+  }
+}
+
+function shakeIn() {
+  const el = document.getElementById('keyIn');
+  el.style.borderColor = '#ff3366';
+  setTimeout(() => { el.style.borderColor = ''; }, 800);
+}
+function logout() {
+  document.getElementById('suite').style.display = 'none';
+  document.getElementById('wmPtr').style.display = 'none';
+  document.getElementById('gw').style.display = 'flex';
+  document.getElementById('keyIn').value = '';
+  localStorage.removeItem(STORE_KEY);
+  activeKey = null;
+}
+function minimize() {
+  document.getElementById('suite').style.display = 'none';
+  document.getElementById('wmPtr').style.display = 'block';
+}
+function restore() {
+  document.getElementById('wmPtr').style.display = 'none';
+  document.getElementById('suite').style.display = 'flex';
+}
+
+// ═══ MODE ═══
+function switchMode(m) {
+  MODE = m;
+  localStorage.setItem(STORE_MODE, m);
+  document.querySelectorAll('.mtb').forEach(t => t.classList.toggle('active', t.dataset.mode === m));
+  raw = []; lastPer = null;
+  fetchData(true);
+  speak('Mode ' + m);
+}
+
+// ═══ FEEDS ═══
+function startFeeds() {
+  fetchData(true);
+  setInterval(() => fetchData(false), 3000);
+  setInterval(updateTimer, 1000);
+  renderPredTable();
+  updateStats();
+  updateFreeBanner();
+}
+
+async function fetchData(initial) {
+  try {
+    const url = API[MODE] + '?ts=' + Date.now();
+    const r = await fetch(url, { cache: 'no-store', mode: 'cors' });
+    const j = await r.json();
+    
+    // Parse live result
+    let list = [];
+    if (j && j.data && Array.isArray(j.data.list)) list = j.data.list;
+    else if (j && j.data && typeof j.data === 'object') list = [j.data];
+    else if (Array.isArray(j)) list = j;
+    else if (j && j.list) list = j.list;
+    else if (j && j.current) list = [j.current];
+    
+    const valid = list.map(i => ({
+      period: String(i.issueNumber || i.period || i.expect || '').trim(),
+      number: Number(i.number ?? i.result ?? i.winningNumber ?? i.num ?? 0),
+      color: String(i.color || i.colour || '').toLowerCase()
+    })).filter(i => i.period && !isNaN(i.number));
+
+    if (valid.length) {
+      valid.sort((a, b) => BigInt(b.period) > BigInt(a.period) ? 1 : -1);
+      const newest = valid[0].period;
+      const isNew = lastPer !== null && newest !== lastPer;
+      lastPer = newest;
+      raw = valid;
+      const next = (BigInt(raw[0].period) + 1n).toString();
+      document.getElementById('periodId').innerText = '#' + next.slice(-4);
+      renderLive(); renderTrend(); renderPattern(); renderHist(); updateDeep();
+      resolve(); renderPredTable();
+      if (isNew && !initial) {
+        beep(1200, 0.1);
+        setTimeout(() => beep(1600, 0.15), 100);
+        toast('🆕 Result: ' + valid[0].number);
+      }
+    }
+  } catch(e) { console.error(e); }
+}
+
+function updateTimer() {
+  const p = MODE_SEC[MODE];
+  const rem = p - (Math.floor(Date.now() / 1000) % p);
+  const m = Math.floor(rem / 60), s = rem % 60;
+  document.getElementById('timer').innerText = (m < 10 ? '0'+m : m) + ':' + (s < 10 ? '0'+s : s);
+  if (rem <= 3) fetchData(false);
+}
+
+function renderLive() {
+  if (!raw.length) return;
+  const l = raw[0], n = l.number;
+  const size = n >= 5 ? 'BIG' : 'SMALL';
+  document.getElementById('lastNum').textContent = n;
+  document.getElementById('lastSize').textContent = size;
+  document.getElementById('lastSize').style.color = size === 'BIG' ? 'var(--gold)' : 'var(--cyan)';
+  let cTxt = l.color.toUpperCase(), cClr = 'var(--green)';
+  if (l.color.includes('violet')) cClr = 'var(--purple)';
+  else if (l.color.includes('red')) cClr = 'var(--red)';
+  document.getElementById('lastColor').textContent = cTxt;
+  document.getElementById('lastColor').style.color = cClr;
+}
+
+function renderTrend() {
+  const arr = raw.slice(0, 50).reverse();
+  document.getElementById('trendChart').innerHTML = arr.map(r => {
+    let cls = r.number >= 5 ? 'big' : 'small';
+    if (r.color.includes('violet')) cls = 'violet';
+    const h = 20 + (r.number / 9) * 80;
+    return '<div class="tr ' + cls + '" style="height:' + h + '%"></div>';
+  }).join('');
+}
+
+function renderPattern() {
+  const arr = raw.slice(0, 30).reverse();
+  document.getElementById('patternStrip').innerHTML = arr.map(r => {
+    let cls = r.number >= 5 ? 'big' : 'small';
+    if (r.color.includes('violet')) cls = 'violet';
+    return '<div class="pb ' + cls + '">' + r.number + '</div>';
+  }).join('');
+}
+
+function renderHist() {
+  const arr = raw.slice(0, 50);
+  const tb = document.getElementById('histTable');
+  if (!arr.length) { tb.innerHTML = '<tr><td colspan="4" style="color:#88a0aa;padding:10px">No data</td></tr>'; return; }
+  tb.innerHTML = arr.map(r => {
+    const size = r.number >= 5 ? 'BIG' : 'SMALL';
+    let cls = r.number >= 5 ? 'big' : 'small';
+    let cTxt = 'RED', cClr = 'var(--red)';
+    if (r.color.includes('violet')) { cls = 'violet'; cTxt = 'VIOLET'; cClr = 'var(--purple)'; }
+    else if (r.color.includes('green')) { cTxt = 'GREEN'; cClr = 'var(--green)'; }
+    return '<tr><td>' + r.period.slice(-6) + '</td><td><span class="rb ' + cls + '">' + r.number + '</span></td><td>' + size + '</td><td style="color:' + cClr + ';font-weight:700">' + cTxt + '</td></tr>';
+  }).join('');
+}
+
+function updateDeep() {
+  const nums = raw.map(x => x.number);
+  if (nums.length < 5) return;
+  let streak = 1, sType = nums[0] >= 5 ? 'BIG' : 'SMALL';
+  for (let i = 1; i < nums.length; i++) {
+    const t = nums[i] >= 5 ? 'BIG' : 'SMALL';
+    if (t === sType) streak++; else break;
+  }
+  document.getElementById('dStreak').textContent = streak + 'x ' + sType[0];
+  const l5b = nums.slice(0, 5).filter(n => n >= 5).length;
+  const l20b = nums.slice(0, 20).filter(n => n >= 5).length;
+  const mom = (l5b / 5) - (l20b / 20);
+  const me = document.getElementById('dMom');
+  me.textContent = (mom >= 0 ? '+' : '') + mom.toFixed(2);
+  me.style.color = mom > 0.15 ? 'var(--green)' : mom < -0.15 ? 'var(--red)' : '#fff';
+  const l30 = nums.slice(0, 30);
+  const bPct = Math.round((l30.filter(n => n >= 5).length / l30.length) * 100);
+  document.getElementById('dBig').textContent = bPct + '%';
+  document.getElementById('dSmall').textContent = (100 - bPct) + '%';
+  let tTxt = 'NEUTRAL', tClr = 'var(--gold)';
+  if (mom > 0.2) { tTxt = 'BIG ↑'; tClr = 'var(--green)'; }
+  else if (mom < -0.2) { tTxt = 'SMALL ↓'; tClr = 'var(--cyan)'; }
+  document.getElementById('dTrend').textContent = tTxt;
+  document.getElementById('dTrend').style.color = tClr;
+  const p4 = nums.slice(0, 4).map(n => n >= 5 ? 'B' : 'S').join('');
+  document.getElementById('dPat').textContent = p4;
+}
+
+// ═══ 15-LAYER ANALYSIS ═══
+function deepAnalyze() {
+  const nums = raw.map(x => x.number);
+  if (nums.length < 10) return null;
+
+  const fScore = Array(10).fill(0);
+  nums.slice(0, 100).forEach((n, i) => { fScore[n] += Math.max(0.1, 40.0 - i * 0.2); });
+
+  const l20 = nums.slice(0, 20), l50 = nums.slice(0, 50), l100 = nums.slice(0, 100);
+  const b20 = l20.filter(n => n >= 5).length;
+  const b50 = l50.filter(n => n >= 5).length;
+  const r20 = b20 / 20, r50 = b50 / 50;
+
+  let streak = 1, sType = nums[0] >= 5 ? 'BIG' : 'SMALL';
+  for (let i = 1; i < nums.length; i++) {
+    const t = nums[i] >= 5 ? 'BIG' : 'SMALL';
+    if (t === sType) streak++; else break;
+  }
+  let zz = 0;
+  for (let i = 0; i < Math.min(10, nums.length - 1); i++) {
+    if ((nums[i] >= 5 ? 'B' : 'S') !== (nums[i+1] >= 5 ? 'B' : 'S')) zz++;
+  }
+  const l5b = nums.slice(0, 5).filter(n => n >= 5).length;
+  const mom = (l5b / 5) - r20;
+  const dev50 = r50 - 0.5;
+  const c100 = Array(10).fill(0);
+  l100.forEach(n => { if (n >= 0 && n <= 9) c100[n]++; });
+  let hB = 0, hS = 0;
+  for (let i = 0; i < 10; i++) { if (i >= 5) hB += c100[i]; else hS += c100[i]; }
+
+  const cCount = { green: 0, red: 0, violet: 0 };
+  raw.slice(0, 30).forEach(r => {
+    if (r.color.includes('violet')) cCount.violet++;
+    else if (r.color.includes('green')) cCount.green++;
+    else if (r.color.includes('red')) cCount.red++;
+  });
+
+  let odd = 0, even = 0;
+  l20.forEach(n => { if (n % 2 === 0) even++; else odd++; });
+  const evR = even / 20;
+
+  let predSize, reason, baseConf;
+  if (streak >= 5) { predSize = sType === 'BIG' ? 'SMALL' : 'BIG'; reason = 'Breaker: ' + streak + 'x ' + sType; baseConf = 78 + Math.min(streak * 2, 10); }
+  else if (zz >= 7) { predSize = nums[0] >= 5 ? 'SMALL' : 'BIG'; reason = 'Zigzag follow'; baseConf = 70; }
+  else if (mom > 0.3) { predSize = 'BIG'; reason = 'Strong BIG momentum'; baseConf = 67; }
+  else if (mom < -0.3) { predSize = 'SMALL'; reason = 'Strong SMALL momentum'; baseConf = 67; }
+  else if (dev50 > 0.2) { predSize = 'SMALL'; reason = 'Reversion (BIG over)'; baseConf = 63; }
+  else if (dev50 < -0.2) { predSize = 'BIG'; reason = 'Reversion (SMALL over)'; baseConf = 63; }
+  else if (hB > hS + 5) { predSize = 'BIG'; reason = 'Hot: BIG side'; baseConf = 60; }
+  else if (hS > hB + 5) { predSize = 'SMALL'; reason = 'Hot: SMALL side'; baseConf = 60; }
+  else if (evR > 0.7 && nums[0] % 2 === 1) { predSize = nums[0] >= 5 ? 'SMALL' : 'BIG'; reason = 'Parity bias'; baseConf = 58; }
+  else { predSize = b20 >= 10 ? 'BIG' : 'SMALL'; reason = 'Trend follow'; baseConf = 56; }
+
+  let bestN;
+  if (predSize === 'BIG') {
+    let b = -1, bi = 5;
+    for (let i = 5; i <= 9; i++) if (fScore[i] > b) { b = fScore[i]; bi = i; }
+    bestN = bi;
+  } else {
+    let b = -1, bi = 0;
+    for (let i = 0; i <= 4; i++) if (fScore[i] > b) { b = fScore[i]; bi = i; }
+    bestN = bi;
+  }
+
+  let conf = baseConf;
+  if (streak >= 6) conf += 3;
+  if (Math.abs(mom) > 0.4) conf += 2;
+  conf = Math.min(88, conf);
+
+  let pColor;
+  if (cCount.violet >= 3 && bestN === 0) pColor = 'VIOLET';
+  else if (bestN === 5) pColor = 'VIOLET';
+  else if (cCount.green > cCount.red) pColor = 'GREEN';
+  else if (cCount.red > cCount.green) pColor = 'RED';
+  else pColor = 'GREEN';
+
+  return { number: bestN, size: predSize, color: pColor, confidence: conf, reasoning: reason, bigPct: Math.round(r20 * 100) };
+}
+
+// ═══ RUN ENGINE — FIXED PREDICTION DISPLAY ═══
+function runEngine() {
+  const s = document.getElementById('suite');
+  const btn = document.getElementById('startBtn');
+  const predBox = document.getElementById('predBox');
+
+  // Free trial check
+  const isTrial = !activeKey || activeKey.plan === 'trial';
+  if (isTrial) {
+    const used = parseInt(localStorage.getItem(STORE_FREE) || '0');
+    if (used >= FREE_MAX) {
+      toast('🔒 Free trial ended! Buy plan');
+      speak('Free trial khatam. Plan kharido');
+      setTimeout(openPayment, 500);
+      return;
+    }
+  }
+
+  if (raw.length < 10) {
+    toast('⏳ Loading data... wait 5 sec');
+    return;
+  }
+
+  if (engineState === 'analyzing') return;
+  engineState = 'analyzing';
+  s.classList.add('shake');
+  btn.innerText = '⚡ ANALYZING...';
+  btn.style.pointerEvents = 'none';
+  document.getElementById('predTitle').innerText = '◆ 15-LAYER ANALYSIS RUNNING ◆';
+  document.getElementById('predDisp').innerHTML = '<span class="pl2">⚡ SCANNING ' + raw.length + ' RESULTS...</span>';
+  document.getElementById('predConf').innerText = 'CONFIDENCE: CALCULATING...';
+  document.getElementById('predReason').innerText = '—';
+
+  setTimeout(() => {
+    s.classList.remove('shake');
+    btn.style.pointerEvents = 'auto';
+    btn.innerText = '🔄 RE-START';
+
+    const p = deepAnalyze();
+    if (!p) {
+      document.getElementById('predDisp').innerHTML = '<span style="color:var(--red)">NO DATA</span>';
+      document.getElementById('predTitle').innerText = '◆ WAITING FOR STREAM ◆';
+      engineState = 'idle';
+      return;
+    }
+
+    // Count free trial
+    if (isTrial) {
+      const used = parseInt(localStorage.getItem(STORE_FREE) || '0') + 1;
+      localStorage.setItem(STORE_FREE, used.toString());
+      const left = FREE_MAX - used;
+      if (left <= 0) toast('🔒 Free trial ended');
+      else if (left <= 3) toast('⚠️ Only ' + left + ' free left!');
+      else toast('🎁 Free ' + used + '/' + FREE_MAX);
+      updateFreeBanner();
+      updatePlanBadge();
+    }
+
+    // ═══ DISPLAY PREDICTION — YELLOW HIGHLIGHTED ═══
+    document.getElementById('predTitle').innerText = '🎯 PREDICTION FOR #' + (BigInt(raw[0].period) + 1n).toString().slice(-4) + ' 🎯';
+    document.getElementById('predDisp').innerHTML = 
+      '<span class="ps">' + p.size + '</span> ' +
+      '<span style="color:var(--gold)">//</span> ' +
+      '<span class="pn">' + p.number + '</span>';
+    document.getElementById('predConf').innerText = '✅ CONFIDENCE: ' + p.confidence + '%';
+    document.getElementById('predReason').innerText = '◈ ' + p.reasoning + ' ◈ BIG: ' + p.bigPct + '%';
+    document.getElementById('confFill').style.width = p.confidence + '%';
+
+    // Flash animation
+    predBox.style.animation = 'none';
+    setTimeout(() => {
+      predBox.style.animation = 'scan 0.5s';
+    }, 10);
+
+    const tPer = document.getElementById('periodId').innerText.replace('#', '');
+    tracked.unshift({
+      period: tPer,
+      fullPeriod: (BigInt(raw[0].period) + 1n).toString(),
+      number: p.number, size: p.size, color: p.color,
+      confidence: p.confidence, reasoning: p.reasoning,
+      status: 'PENDING', actualNum: null, actualSize: null, actualColor: null,
+      timestamp: Date.now(), key: activeKey ? activeKey.key : 'FREE'
+    });
+    tracked = tracked.slice(0, 50);
+    saveHistory();
+    publishToLedger(tracked[0]);
+    renderPredTable();
+    updateStats();
+    engineState = 'predicted';
+
+    speak('Prediction ' + p.size + ', number ' + p.number);
+    beep(880, 0.08);
+    setTimeout(() => beep(1319, 0.15), 100);
+  }, 3000);
+}
+
+// ═══ PUBLIC LEDGER ═══
+function publishToLedger(pred) {
+  try {
+    const ledger = JSON.parse(localStorage.getItem('anant_public_ledger') || '[]');
+    ledger.unshift({
+      period: pred.period, mode: MODE,
+      number: pred.number, size: pred.size, color: pred.color,
+      confidence: pred.confidence, reasoning: pred.reasoning,
+      key: activeKey ? activeKey.key : 'FREE',
+      timestamp: pred.timestamp, status: 'PENDING',
+      actualNum: null, actualColor: null
+    });
+    localStorage.setItem('anant_public_ledger', JSON.stringify(ledger.slice(0, 200)));
+  } catch(e) {}
+}
+
+// ═══ RESOLVE ═══
+function resolve() {
+  if (!raw.length) return;
+  let changed = false;
+  tracked.forEach(p => {
+    if (p.status !== 'PENDING') return;
+    const a = raw.find(r => String(r.period) === String(p.fullPeriod));
+    if (!a) return;
+    const aS = a.number >= 5 ? 'BIG' : 'SMALL';
+    p.actualNum = a.number; p.actualSize = aS; p.actualColor = a.color;
+    const sWin = p.size === aS, nWin = p.number === a.number;
+    p.status = (sWin || nWin) ? 'WIN' : 'MISS';
+    changed = true;
+    if (p.status === 'WIN') {
+      beep(1319, 0.15); setTimeout(() => beep(1568, 0.2), 150);
+      toast('✅ WIN! Predicted ' + p.number + ' — Got ' + a.number);
+      speak('Win. Predicted ' + p.number);
+    } else {
+      beep(440, 0.2);
+      toast('❌ MISS — Predicted ' + p.number + ', Got ' + a.number);
+      speak('Miss. Predicted ' + p.number);
+    }
+    const ledger = JSON.parse(localStorage.getItem('anant_public_ledger') || '[]');
+    const li = ledger.findIndex(x => x.period === p.period && x.timestamp === p.timestamp);
+    if (li !== -1) {
+      ledger[li].status = p.status;
+      ledger[li].actualNum = a.number;
+      ledger[li].actualColor = a.color;
+      localStorage.setItem('anant_public_ledger', JSON.stringify(ledger));
+    }
+  });
+  if (changed) { saveHistory(); updateStats(); }
+}
+
+function updateStats() {
+  const t = tracked.length;
+  const w = tracked.filter(p => p.status === 'WIN').length;
+  const m = tracked.filter(p => p.status === 'MISS').length;
+  const r = (w + m) > 0 ? Math.round((w / (w + m)) * 100) : 0;
+  document.getElementById('stTotal').textContent = t;
+  document.getElementById('stWin').textContent = w;
+  document.getElementById('stMiss').textContent = m;
+  document.getElementById('stRate').textContent = r + '%';
+}
+
+function renderPredTable() {
+  const tb = document.getElementById('predTable');
+  if (!tracked.length) {
+    tb.innerHTML = '<tr><td colspan="5" style="color:#88a0aa;padding:20px;text-align:center"><div style="font-size:24px;margin-bottom:8px">🎯</div><div style="font-family:Orbitron,sans-serif;font-size:10px;letter-spacing:1px">NO PREDICTIONS YET<br><span style="color:var(--green);font-size:9px">Click START to begin</span></div></td></tr>';
+    return;
+  }
+  tb.innerHTML = tracked.slice(0, 50).map(p => {
+    let sb = '';
+    if (p.status === 'PENDING') sb = '<span class="swait">⏳ WAIT</span>';
+    else if (p.status === 'WIN') sb = '<span class="sw">✅ WIN</span>';
+    else sb = '<span class="sl2">❌ MISS</span>';
+    let aS = '—';
+    if (p.actualNum !== null) {
+      let cls = p.actualNum >= 5 ? 'big' : 'small';
+      if (p.actualColor && p.actualColor.includes('violet')) cls = 'violet';
+      aS = '<span class="rb ' + cls + '">' + p.actualNum + '</span>';
+    }
+    let pS = p.size === 'BIG' ? '<span class="rb big">B</span>' : '<span class="rb small">S</span>';
+    pS += ' ' + p.number;
+    const cC = p.confidence >= 75 ? 'var(--green)' : p.confidence >= 65 ? 'var(--gold)' : 'var(--cyan)';
+    return '<tr><td><b>' + p.period + '</b></td><td>' + pS + '</td><td>' + aS + '</td><td style="color:' + cC + ';font-size:10px;font-weight:900">' + p.confidence + '%</td><td>' + sb + '</td></tr>';
+  }).join('');
+}
+
+// ═══ STORAGE ═══
+function saveHistory() {
+  try { localStorage.setItem(STORE_HIST, JSON.stringify(tracked.slice(0, 50))); } catch(e) {}
+}
+function loadHistory() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE_HIST) || '[]');
+    if (Array.isArray(s)) tracked = s;
+  } catch(e) { tracked = []; }
+}
+function resetHistory() {
+  if (!confirm('Clear all prediction history?')) return;
+  tracked = [];
+  localStorage.removeItem(STORE_HIST);
+  renderPredTable();
+  updateStats();
+  toast('🗑 History cleared');
+}
+function exportHistory() {
+  try {
+    const d = JSON.stringify({
+      exported: new Date().toISOString(),
+      mode: MODE, plan: activeKey ? activeKey.plan : 'trial',
+      stats: { total: tracked.length, wins: tracked.filter(p => p.status === 'WIN').length, misses: tracked.filter(p => p.status === 'MISS').length },
+      predictions: tracked
+    }, null, 2);
+    const b = new Blob([d], { type: 'application/json' });
+    const u = URL.createObjectURL(b);
+    const a = document.createElement('a');
+    a.href = u; a.download = 'anant_history_' + Date.now() + '.json'; a.click();
+    URL.revokeObjectURL(u);
+    toast('📤 Exported');
+  } catch(e) { toast('❌ Export failed'); }
+}
+
+// ═══ PAYMENT ═══
+function openPayment() {
+  document.getElementById('payScreen').style.display = 'flex';
+  renderPayMethods();
+  updatePayDisplay();
+}
+
+function pickTier(t) {
+  selectedTier = t;
+  document.querySelectorAll('.tier').forEach(el => el.classList.remove('on'));
+  document.querySelector('.tier[data-tier="' + t + '"]').classList.add('on');
+  updatePayDisplay();
+}
+
+function updatePayDisplay() {
+  const tier = TIERS[selectedTier];
+  const payAmt = document.getElementById('payAmt');
+  if (payAmt) payAmt.textContent = tier.price;
+  if (selectedMethod) pickMethod(selectedMethod);
+}
+
+function renderPayMethods() {
+  const wrap = document.getElementById('payMethods');
+  const opts = [];
+  if (ownerConfig.upi.enabled) {
+    opts.push('<div class="pm-opt" onclick="pickMethod(\'upi\')" id="pmUPI"><div class="pm-ic">📱</div><div><div class="pm-nm">UPI (FamPay)</div><div class="pm-sb">' + ownerConfig.upi.id + '</div></div></div>');
+  }
+  if (ownerConfig.crypto.enabled) {
+    opts.push('<div class="pm-opt" onclick="pickMethod(\'crypto\')" id="pmCrypto"><div class="pm-ic">🪙</div><div><div class="pm-nm">USDT (TRC20)</div><div class="pm-sb">' + ownerConfig.crypto.address.slice(0, 16) + '...</div></div></div>');
+  }
+  wrap.innerHTML = opts.join('');
+}
+
+function pickMethod(m) {
+  selectedMethod = m;
+  document.querySelectorAll('.pm-opt').forEach(el => el.classList.remove('on'));
+  const el = document.getElementById(m === 'upi' ? 'pmUPI' : 'pmCrypto');
+  if (el) el.classList.add('on');
+
+  const qrBox = document.getElementById('qrBox');
+  const upiLink = document.getElementById('upiLink');
+  const tier = TIERS[selectedTier];
+
+  if (m === 'upi') {
+    qrBox.style.display = 'block';
+    upiLink.style.display = 'block';
+    document.getElementById('qrLabel').textContent = '📱 SCAN UPI QR — ₹' + tier.price;
+    document.getElementById('qrImg').src = ownerConfig.upi.qr;
+    document.getElementById('qrAddr').textContent = ownerConfig.upi.id;
+    document.getElementById('upiLink').href = 'upi://pay?pa=' + encodeURIComponent(ownerConfig.upi.id) + '&pn=Anant%20Pro&am=' + tier.price + '&cu=INR';
+  } else if (m === 'crypto') {
+    qrBox.style.display = 'block';
+    upiLink.style.display = 'none';
+    document.getElementById('qrLabel').textContent = '🪙 SCAN CRYPTO QR — $' + (tier.price / 85).toFixed(2) + ' USDT';
+    document.getElementById('qrImg').src = ownerConfig.crypto.qr;
+    document.getElementById('qrAddr').textContent = ownerConfig.crypto.address;
+  }
+}
+
+function copyAddr() {
+  const t = document.getElementById('qrAddr').textContent;
+  navigator.clipboard.writeText(t).then(() => toast('📋 Copied!'));
+}
+
+function openUPI(e) {
+  e.preventDefault();
+  window.location.href = document.getElementById('upiLink').href;
+}
+
+function shotChange(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  if (f.size > 300 * 1024) { toast('❌ Max 300KB'); return; }
+  const r = new FileReader();
+  r.onload = ev => {
+    shotData = ev.target.result;
+    document.getElementById('shotPrev').innerHTML = '<img src="' + shotData + '" style="max-width:100%;max-height:180px;border-radius:12px;border:1px solid var(--green)">';
+  };
+  r.readAsDataURL(f);
+}
+
+async function submitPay() {
+  const utr = (document.getElementById('utrIn').value || '').trim().toUpperCase();
+  if (!selectedMethod) { toast('❌ Select payment method'); return; }
+  if (utr.length < 8) { toast('❌ Valid UTR required'); return; }
+  if (!shotData) { toast('❌ Upload screenshot'); return; }
+
+  const tier = TIERS[selectedTier];
+  const payment = {
+    id: 'PAY_' + Date.now(),
+    key: activeKey ? activeKey.key : 'FREE',
+    method: selectedMethod,
+    tier: selectedTier,
+    amount: tier.price,
+    utr: utr,
+    screenshot: shotData,
+    status: 'PENDING',
+    timestamp: Date.now()
+  };
+
+  const payments = JSON.parse(localStorage.getItem('anant_payments_v11') || '[]');
+  payments.push(payment);
+  localStorage.setItem('anant_payments_v11', JSON.stringify(payments));
+
+  toast('✅ Payment submitted! Verifier will confirm');
+  speak('Payment submit ho gayi');
+  closePay();
+}
+
+function closePay() {
+  document.getElementById('payScreen').style.display = 'none';
+  selectedMethod = null;
+  shotData = null;
+  document.getElementById('utrIn').value = '';
+  document.getElementById('shotPrev').innerHTML = '';
+  document.getElementById('qrBox').style.display = 'none';
+  document.getElementById('upiLink').style.display = 'none';
+}
+
+function loadOwnerConfig() {
+  try {
+    const saved = localStorage.getItem('anant_owner_config_v11');
+    if (saved) ownerConfig = Object.assign(ownerConfig, JSON.parse(saved));
+  } catch(e) {}
+}
+
+// ═══ DRAGGABLE ═══
+(function() {
+  const modal = document.getElementById('suite');
+  const handle = document.getElementById('shHead');
+  let drag = false, sx, sy, ix, iy;
+  handle.addEventListener('mousedown', start);
+  handle.addEventListener('touchstart', start, { passive: false });
+  document.addEventListener('mousemove', move);
+  document.addEventListener('touchmove', move, { passive: false });
+  document.addEventListener('mouseup', stop);
+  document.addEventListener('touchend', stop);
+  function start(e) {
+    if (e.target.closest('button')) return;
+    drag = true;
+    sx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    sy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+    ix = modal.offsetLeft; iy = modal.offsetTop;
+  }
+  function move(e) {
+    if (!drag) return;
+    e.preventDefault();
+    const cx = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const cy = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+    modal.style.left = Math.max(0, Math.min(ix + (cx - sx), window.innerWidth - modal.offsetWidth)) + 'px';
+    modal.style.top = Math.max(0, Math.min(iy + (cy - sy), window.innerHeight - modal.offsetHeight)) + 'px';
+    modal.style.transform = 'none';
+  }
+  function stop() { drag = false; }
+})();
+
+// ═══ INIT ═══
+document.getElementById('keyIn').addEventListener('keydown', e => { if (e.key === 'Enter') verifyKey(); });
+document.getElementById('keyIn').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase(); });
+
+(function init() {
+  loadOwnerConfig();
+  const s = localStorage.getItem(STORE_SND);
+  if (s === '0') { soundOn = false; document.getElementById('sndBtn').textContent = '🔇'; }
+  const m = localStorage.getItem(STORE_MODE);
+  if (m && (m === '30s' || m === '1m')) {
+    MODE = m;
+    document.querySelectorAll('.mtb').forEach(t => t.classList.toggle('active', t.dataset.mode === m));
+  }
+  const ak = localStorage.getItem(STORE_KEY);
+  if (ak && ak !== 'FREE_TRIAL') {
+    const keys = JSON.parse(localStorage.getItem('anant_keys_db') || '[]');
+    const f = keys.find(k => k.key === ak && k.expiry > Date.now());
+    if (f) { document.getElementById('keyIn').value = ak; setTimeout(verifyKey, 300); }
+    else localStorage.removeItem(STORE_KEY);
+  } else if (ak === 'FREE_TRIAL') {
+    setTimeout(verifyKey, 300);
+  }
+  updateFreeBanner();
+})();
+</script>
+</body>
+</html>
